@@ -1,0 +1,2201 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[    101907,       2192]
+NotebookOptionsPosition[     98182,       2079]
+NotebookOutlinePosition[     99789,       2129]
+CellTagsIndexPosition[     99461,       2117]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Voronoi Diagram on a Sphere", "DemoTitle",
+ CellChangeTimes->{{3.508892549914923*^9, 3.5088925547704086`*^9}}],
+
+Cell["", "InitializationSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"EventHandler", "[", 
+    RowBox[{
+     RowBox[{"Style", "[", 
+      RowBox[{
+       RowBox[{"Graphics3D", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Dynamic", "@", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"!", "s"}], ",", "\[IndentingNewLine]", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"Opacity", "[", ".75", "]"}], ",", 
+                RowBox[{"Sphere", "[", "]"}]}], "}"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"nf", "=", 
+                RowBox[{"Nearest", "[", 
+                 RowBox[{"pp", "\[Rule]", "Automatic"}], "]"}]}], ";", 
+               "\[IndentingNewLine]", 
+               RowBox[{"First", "@", 
+                RowBox[{"ParametricPlot3D", "[", 
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"Cos", "[", "u", "]"}], 
+                    RowBox[{"Sin", "[", "v", "]"}]}], ",", 
+                    RowBox[{
+                    RowBox[{"Sin", "[", "u", "]"}], 
+                    RowBox[{"Sin", "[", "v", "]"}]}], ",", 
+                    RowBox[{"Cos", "[", "v", "]"}]}], "}"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"v", ",", "0", ",", "Pi"}], "}"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"u", ",", "0", ",", 
+                    RowBox[{"2", "Pi"}]}], "}"}], ",", "\[IndentingNewLine]", 
+                  RowBox[{"MaxRecursion", "\[Rule]", 
+                   RowBox[{"ControlActive", "[", 
+                    RowBox[{"1", ",", "Automatic"}], "]"}]}], ",", 
+                  RowBox[{"PlotPoints", "\[Rule]", 
+                   RowBox[{"ControlActive", "[", 
+                    RowBox[{"Automatic", ",", "50"}], "]"}]}], ",", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{"MeshStyle", "\[Rule]", "None"}], ",", 
+                  RowBox[{"Mesh", "\[Rule]", 
+                   RowBox[{"{", 
+                    RowBox[{"Range", "[", 
+                    RowBox[{
+                    RowBox[{"3", "/", "2"}], ",", 
+                    RowBox[{
+                    RowBox[{"Length", "@", "pp"}], "-", 
+                    RowBox[{"1", "/", "2"}]}]}], "]"}], "}"}]}], ",", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{"MeshShading", "\[Rule]", 
+                   RowBox[{"Hue", "/@", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"Range", "@", 
+                    RowBox[{"Length", "@", "pp"}]}], "/", 
+                    RowBox[{"Length", "@", "pp"}]}], ")"}]}]}], ",", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{"MeshFunctions", "\[Rule]", 
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"First", "@", 
+                    RowBox[{"nf", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"#", ",", "#2", ",", "#3"}], "}"}], ",", "1"}], 
+                    "]"}]}], "&"}], "}"}]}]}], "]"}]}]}]}], "]"}]}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Dynamic", "@", 
+            RowBox[{"vd", "@", "pp"}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{"Red", ",", 
+             RowBox[{"Sphere", "[", 
+              RowBox[{
+               RowBox[{"Dynamic", "@", "pp"}], ",", ".05"}], "]"}]}], "}"}]}],
+           "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Boxed", "\[Rule]", "False"}], ",", 
+         RowBox[{"PlotRange", "\[Rule]", "1.1"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Epilog", "\[Rule]", 
+          RowBox[{"Inset", "[", 
+           RowBox[{
+            RowBox[{"Style", "[", 
+             RowBox[{"\"\<Shift+mouseover\>\"", ",", "\[IndentingNewLine]", 
+              RowBox[{"FontColor", "\[Rule]", 
+               RowBox[{"Dynamic", "@", 
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{"CurrentValue", "[", "\"\<ShiftKey\>\"", "]"}], ",",
+                   "Black", ",", "Gray"}], "]"}]}]}]}], "]"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{"Right", ",", "Bottom"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"Right", ",", "Bottom"}], "}"}]}], "]"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"ImageSize", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"Automatic", ",", "400"}], "}"}]}], ",", 
+         RowBox[{"RotationAction", "\[Rule]", "\"\<Clip\>\""}]}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Deployed", "\[Rule]", 
+        RowBox[{"Dynamic", "@", 
+         RowBox[{"CurrentValue", "[", "\"\<ShiftKey\>\"", "]"}]}]}]}], "]"}], 
+     ",", "\[IndentingNewLine]", 
+     RowBox[{"\"\<MouseMoved\>\"", "\[RuleDelayed]", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"CurrentValue", "[", "\"\<ShiftKey\>\"", "]"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"pp", "[", 
+             RowBox[{"[", 
+              RowBox[{"First", "@", 
+               RowBox[{"Ordering", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Function", "[", 
+                   RowBox[{"pt", ",", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"pt", "-", "#"}], ")"}], ".", 
+                    RowBox[{"(", 
+                    RowBox[{"pt", "-", "#"}], ")"}]}]}], "]"}], "/@", "pp"}], 
+                 ",", "1"}], "]"}]}], "]"}], "]"}], "=", "#"}], ")"}], "&"}], 
+         "@", "\[IndentingNewLine]", 
+         RowBox[{"Normalize", "@", 
+          RowBox[{"First", "@", 
+           RowBox[{"MousePosition", "[", 
+            RowBox[{"\"\<Graphics3DBoxIntercepts\>\"", ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"-", "1."}], ",", 
+                 RowBox[{"-", "1."}], ",", 
+                 RowBox[{"-", "1."}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"1.", ",", "1.", ",", "1."}], "}"}]}], "}"}]}], 
+            "]"}]}]}]}]}], "]"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"n", ",", "4", ",", "\"\<number of points\>\""}], "}"}], ",", 
+     "4", ",", "15", ",", "1", ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Manipulator", "[", 
+       RowBox[{
+        RowBox[{"Dynamic", "[", 
+         RowBox[{"n", ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"n", "=", "#"}], ")"}], "<", 
+              RowBox[{"Length", "@", "pp"}]}], ",", "\[IndentingNewLine]", 
+             RowBox[{"pp", "=", 
+              RowBox[{"Take", "[", 
+               RowBox[{"pp", ",", "n"}], "]"}]}], ",", "\[IndentingNewLine]", 
+             RowBox[{"pp", "=", 
+              RowBox[{"Join", "[", 
+               RowBox[{"pp", ",", 
+                RowBox[{"Normalize", "/@", 
+                 RowBox[{"RandomReal", "[", 
+                  RowBox[{
+                   RowBox[{"NormalDistribution", "[", "]"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"n", "-", 
+                    RowBox[{"Length", "@", "pp"}]}], ",", "3"}], "}"}]}], 
+                  "]"}]}]}], "]"}]}]}], "]"}], "&"}]}], "]"}], ",", "#2", ",",
+         "\[IndentingNewLine]", 
+        RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "]"}], 
+      "&"}]}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"s", ",", "False", ",", "\"\<fill regions\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"True", ",", "False"}], "}"}], ",", "Checkbox"}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"pp", ",", 
+       RowBox[{"Normalize", "/@", 
+        RowBox[{"RandomReal", "[", 
+         RowBox[{
+          RowBox[{"NormalDistribution", "[", "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"4", ",", "3"}], "}"}]}], "]"}]}]}], "}"}], ",", "None"}], 
+    "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"nf", ",", "None"}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"AutorunSequencing", "\[Rule]", 
+    RowBox[{"{", "2", "}"}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Initialization", "\[RuleDelayed]", "\[IndentingNewLine]", 
+    RowBox[{"(", 
+     RowBox[{"(*", 
+      RowBox[{
+       RowBox[{"Needs", "[", "\"\<TetGenLink`\>\"", "]"}], ";"}], "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"$TetGenLibrary", "=", 
+          RowBox[{"FileNameJoin", "[", 
+           RowBox[{"{", 
+            RowBox[{
+            "$InstallationDirectory", ",", "\"\<SystemFiles\>\"", ",", 
+             "\"\<Links\>\"", ",", "\"\<TetGenLink\>\"", ",", 
+             "\[IndentingNewLine]", "\"\<LibraryResources\>\"", ",", 
+             "$SystemID", ",", 
+             RowBox[{"\"\<tetgenWolfram.\>\"", "~~", 
+              RowBox[{"Which", "[", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"StringMatchQ", "[", 
+                 RowBox[{"$SystemID", ",", 
+                  RowBox[{"\"\<Windows\>\"", "~~", "___"}]}], "]"}], ",", 
+                "\"\<dll\>\"", ",", "\[IndentingNewLine]", 
+                RowBox[{"StringMatchQ", "[", 
+                 RowBox[{"$SystemID", ",", 
+                  RowBox[{"\"\<Mac\>\"", "~~", "___"}]}], "]"}], ",", 
+                "\"\<dylib\>\"", ",", "\[IndentingNewLine]", "_", ",", 
+                "\"\<so\>\""}], "]"}]}]}], "}"}], "]"}]}], "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"instanceFun", "=", 
+          RowBox[{"LibraryFunctionLoad", "[", 
+           RowBox[{"$TetGenLibrary", ",", "\"\<newTetGenInstance\>\"", ",", 
+            RowBox[{"{", "}"}], ",", "Integer"}], "]"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"setPointsFun", "=", 
+          RowBox[{"LibraryFunctionLoad", "[", 
+           RowBox[{"$TetGenLibrary", ",", "\"\<setPointList\>\"", ",", 
+            RowBox[{"{", 
+             RowBox[{"Integer", ",", 
+              RowBox[{"{", 
+               RowBox[{"Real", ",", "2", ",", "\"\<Shared\>\""}], "}"}]}], 
+             "}"}], ",", "Integer"}], "]"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"tetrahedralizeFun", "=", 
+          RowBox[{"LibraryFunctionLoad", "[", 
+           RowBox[{
+           "$TetGenLibrary", ",", "\"\<tetrahedralizeFun\>\"", ",", 
+            "LinkObject", ",", "LinkObject"}], "]"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"getPointsFun", "=", 
+          RowBox[{"LibraryFunctionLoad", "[", 
+           RowBox[{"$TetGenLibrary", ",", "\"\<getPointList\>\"", ",", 
+            RowBox[{"{", "Integer", "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"Real", ",", "_"}], "}"}]}], "]"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"getFacesFun", "=", 
+          RowBox[{"LibraryFunctionLoad", "[", 
+           RowBox[{"$TetGenLibrary", ",", "\"\<getFaces\>\"", ",", 
+            RowBox[{"{", "Integer", "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"Integer", ",", "2"}], "}"}]}], "]"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"deleteFun", "=", 
+          RowBox[{"LibraryFunctionLoad", "[", 
+           RowBox[{"$TetGenLibrary", ",", "\"\<deleteTetGenInstance\>\"", ",", 
+            RowBox[{"{", "Integer", "}"}], ",", "Integer"}], "]"}]}]}]}], 
+       "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ch", "[", "pts_", "]"}], ":=", 
+       RowBox[{"Module", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"inInst", ",", "outInst"}], "}"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"inInst", ",", "outInst"}], "}"}], "=", 
+           RowBox[{"instanceFun", "@@@", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", "}"}], ",", 
+              RowBox[{"{", "}"}]}], "}"}]}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"setPointsFun", "[", 
+           RowBox[{"inInst", ",", 
+            RowBox[{"Developer`ToPackedArray", "@", 
+             RowBox[{"N", "@", "pts"}]}]}], "]"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"tetrahedralizeFun", "[", 
+           RowBox[{"\"\<-E\>\"", ",", "inInst", ",", "outInst"}], "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"deleteFun", "/@", 
+               RowBox[{"{", 
+                RowBox[{"inInst", ",", "outInst"}], "}"}]}], ";", "#"}], 
+             ")"}], "&"}], "@", "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"getPointsFun", "@", "outInst"}], ",", 
+             RowBox[{
+              RowBox[{"getFacesFun", "@", "outInst"}], "+", "1"}]}], 
+            "}"}]}]}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"vd", "[", 
+        RowBox[{"pts_", "/;", 
+         RowBox[{
+          RowBox[{"Length", "@", "pts"}], ">", "3"}]}], "]"}], ":=", 
+       RowBox[{"Module", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"verts", ",", "polys", ",", "voronoiverts", ",", "segs"}], 
+          "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"verts", ",", "polys"}], "}"}], "=", 
+           RowBox[{"(*", "TetGenLink`TetGenConvexHull", "*)"}], 
+           RowBox[{"ch", "@", "pts"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"voronoiverts", "=", 
+           RowBox[{"Normalize", "/@", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"Cross", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"verts", "[", 
+                   RowBox[{"[", "#3", "]"}], "]"}], "-", 
+                  RowBox[{"verts", "[", 
+                   RowBox[{"[", "#", "]"}], "]"}]}], ",", 
+                 RowBox[{
+                  RowBox[{"verts", "[", 
+                   RowBox[{"[", "#2", "]"}], "]"}], "-", 
+                  RowBox[{"verts", "[", 
+                   RowBox[{"[", "#", "]"}], "]"}]}]}], "]"}], "&"}], ")"}], "@@@",
+              "polys"}]}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"segs", "=", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"Length", "[", 
+                 RowBox[{"Intersection", "@@", 
+                  RowBox[{"polys", "[", 
+                   RowBox[{"[", 
+                    RowBox[{"{", "##", "}"}], "]"}], "]"}]}], "]"}], "<", 
+                "2"}], ",", 
+               RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+               RowBox[{"ParametricPlot3D", "[", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Normalize", "[", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"voronoiverts", "[", 
+                    RowBox[{"[", "#", "]"}], "]"}], "t"}], "+", 
+                    RowBox[{
+                    RowBox[{"voronoiverts", "[", 
+                    RowBox[{"[", "#2", "]"}], "]"}], 
+                    RowBox[{"(", 
+                    RowBox[{"1", "-", "t"}], ")"}]}]}], "]"}], "//", 
+                  "\[IndentingNewLine]", "Evaluate"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"t", ",", "0", ",", "1"}], "}"}], ",", 
+                 RowBox[{"PlotStyle", "\[Rule]", 
+                  RowBox[{"AbsoluteThickness", "[", "2", "]"}]}]}], "]"}]}], 
+              "\[IndentingNewLine]", "]"}], "&"}], "@@@", 
+            RowBox[{"Subsets", "[", 
+             RowBox[{
+              RowBox[{"Range", "@", 
+               RowBox[{"Length", "@", "polys"}]}], ",", 
+              RowBox[{"{", "2", "}"}]}], "]"}]}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"First", "@", 
+           RowBox[{"Show", "[", "segs", "]"}]}]}]}], "]"}]}]}], ")"}]}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{
+  3.5088925794708786`*^9, {3.50895358684375*^9, 3.5089536380625*^9}, {
+   3.508953675546875*^9, 3.508953677109375*^9}, {3.508953714765625*^9, 
+   3.508953719671875*^9}, {3.509125397979497*^9, 3.509125407077005*^9}, {
+   3.513648358421875*^9, 3.513648385453125*^9}, {3.513648426796875*^9, 
+   3.513648439328125*^9}, {3.513653043984375*^9, 3.513653057484375*^9}, {
+   3.5140647036772785`*^9, 3.514064770873623*^9}, {3.5140660541542873`*^9, 
+   3.5140660611744275`*^9}, {3.5140673198320417`*^9, 3.5140673330843673`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 4, $CellContext`nf$$ = 
+    0, $CellContext`pp$$ = {{
+    0.7082890579798903, -0.5274110354762404, -0.4692165917823448}, {
+    0.6394104065002012, -0.7215463319976438, 
+    0.26556585405505967`}, {-0.3637805348584968, -0.13759690450706347`, 
+    0.9212658760250161}, {0.7400634551897394, -0.06878219874329108, 
+    0.6690105316276144}}, $CellContext`s$$ = False, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 4, "number of points"}, 4, 15, 1, 
+      Dynamic[Manipulator[
+        Dynamic[$CellContext`n$$, 
+         If[($CellContext`n$$ = #) < 
+          Length[$CellContext`pp$$], $CellContext`pp$$ = 
+          Take[$CellContext`pp$$, $CellContext`n$$], $CellContext`pp$$ = 
+          Join[$CellContext`pp$$, 
+            Map[Normalize, 
+             RandomReal[
+              
+              NormalDistribution[], {$CellContext`n$$ - 
+               Length[$CellContext`pp$$], 3}]]]]& ], #2, Appearance -> 
+        "Labeled"]& ]}, {{
+       Hold[$CellContext`s$$], False, "fill regions"}, {True, False}}, {{
+       Hold[$CellContext`pp$$], {{
+       0.7082890579798903, -0.5274110354762404, -0.4692165917823448}, {
+       0.6394104065002012, -0.7215463319976438, 
+       0.26556585405505967`}, {-0.3637805348584968, -0.13759690450706347`, 
+       0.9212658760250161}, {0.7400634551897394, -0.06878219874329108, 
+       0.6690105316276144}}}, 0}, {
+      Hold[$CellContext`nf$$], 0}}, Typeset`size$$ = {368., {198., 202.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`s$17369$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`n$$ = 4, $CellContext`nf$$ = 
+        0, $CellContext`pp$$ = {{
+         0.7082890579798903, -0.5274110354762404, -0.4692165917823448}, {
+         0.6394104065002012, -0.7215463319976438, 
+         0.26556585405505967`}, {-0.3637805348584968, -0.13759690450706347`, 
+         0.9212658760250161}, {0.7400634551897394, -0.06878219874329108, 
+         0.6690105316276144}}, $CellContext`s$$ = False}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`s$$, $CellContext`s$17369$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> EventHandler[
+        Style[
+         Graphics3D[{
+           Dynamic[
+            If[
+             Not[$CellContext`s$$], {
+              Opacity[0.75], 
+              Sphere[]}, $CellContext`nf$$ = 
+              Nearest[$CellContext`pp$$ -> Automatic]; First[
+               
+               ParametricPlot3D[{
+                Cos[$CellContext`u] Sin[$CellContext`v], Sin[$CellContext`u] 
+                 Sin[$CellContext`v], 
+                 Cos[$CellContext`v]}, {$CellContext`v, 0, 
+                 Pi}, {$CellContext`u, 0, 2 Pi}, MaxRecursion -> 
+                ControlActive[1, Automatic], PlotPoints -> 
+                ControlActive[Automatic, 50], MeshStyle -> None, Mesh -> {
+                  Range[3/2, Length[$CellContext`pp$$] - 1/2]}, MeshShading -> 
+                Map[Hue, Range[
+                    Length[$CellContext`pp$$]]/Length[$CellContext`pp$$]], 
+                MeshFunctions -> {First[
+                   $CellContext`nf$$[{#, #2, #3}, 1]]& }]]]], 
+           Dynamic[
+            $CellContext`vd[$CellContext`pp$$]], {Red, 
+            Sphere[
+             Dynamic[$CellContext`pp$$], 0.05]}}, Boxed -> False, PlotRange -> 
+          1.1, Epilog -> Inset[
+            Style["Shift+mouseover", FontColor -> Dynamic[
+               If[
+                CurrentValue["ShiftKey"], Black, Gray]]], {Right, Bottom}, {
+            Right, Bottom}], ImageSize -> {Automatic, 400}, RotationAction -> 
+          "Clip"], Deployed -> Dynamic[
+           CurrentValue["ShiftKey"]]], "MouseMoved" :> If[
+          CurrentValue["ShiftKey"], 
+          ((Part[$CellContext`pp$$, 
+            First[
+             Ordering[
+              Map[
+               Function[$CellContext`pt, 
+                
+                Dot[$CellContext`pt - #, $CellContext`pt - #]], \
+$CellContext`pp$$], 1]]] = #)& )[
+           Normalize[
+            First[
+             MousePosition[
+             "Graphics3DBoxIntercepts", {{-1., -1., -1.}, {1., 1., 1.}}]]]]]],
+       "Specifications" :> {{{$CellContext`n$$, 4, "number of points"}, 4, 15,
+          1, 
+         Dynamic[Manipulator[
+           
+           Dynamic[$CellContext`n$$, 
+            If[($CellContext`n$$ = #) < 
+             Length[$CellContext`pp$$], $CellContext`pp$$ = 
+             Take[$CellContext`pp$$, $CellContext`n$$], $CellContext`pp$$ = 
+             Join[$CellContext`pp$$, 
+               Map[Normalize, 
+                RandomReal[
+                 
+                 NormalDistribution[], {$CellContext`n$$ - 
+                  Length[$CellContext`pp$$], 3}]]]]& ], #2, Appearance -> 
+           "Labeled"]& ]}, {{$CellContext`s$$, False, "fill regions"}, {
+         True, False}, ControlType -> 
+         Checkbox}, {{$CellContext`pp$$, {{
+          0.7082890579798903, -0.5274110354762404, -0.4692165917823448}, {
+          0.6394104065002012, -0.7215463319976438, 
+          0.26556585405505967`}, {-0.3637805348584968, -0.13759690450706347`, 
+          0.9212658760250161}, {0.7400634551897394, -0.06878219874329108, 
+          0.6690105316276144}}}, 0, ControlType -> None}, {$CellContext`nf$$, 
+         0, ControlType -> None}}, "Options" :> {AutorunSequencing -> {2}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{417., {253., 258.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>((
+      With[{$CellContext`$TetGenLibrary = 
+         FileNameJoin[{$InstallationDirectory, "SystemFiles", "Links", 
+            "TetGenLink", "LibraryResources", $SystemID, 
+            StringExpression["tetgenWolfram.", 
+             Which[
+              StringMatchQ[$SystemID, 
+               StringExpression["Windows", 
+                BlankNullSequence[]]], "dll", 
+              StringMatchQ[$SystemID, 
+               StringExpression["Mac", 
+                BlankNullSequence[]]], "dylib", 
+              Blank[], "so"]]}]}, $CellContext`instanceFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, 
+           "newTetGenInstance", {}, Integer]; $CellContext`setPointsFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, "setPointList", {
+           Integer, {Real, 2, "Shared"}}, 
+           Integer]; $CellContext`tetrahedralizeFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, "tetrahedralizeFun",
+            LinkObject, LinkObject]; $CellContext`getPointsFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, "getPointList", {
+           Integer}, {Real, 
+            Blank[]}]; $CellContext`getFacesFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, "getFaces", {
+           Integer}, {Integer, 2}]; $CellContext`deleteFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, 
+           "deleteTetGenInstance", {Integer}, Integer]]; $CellContext`ch[
+         Pattern[$CellContext`pts, 
+          Blank[]]] := 
+       Module[{$CellContext`inInst, $CellContext`outInst}, \
+{$CellContext`inInst, $CellContext`outInst} = 
+          Apply[$CellContext`instanceFun, {{}, {}}, {
+            1}]; $CellContext`setPointsFun[$CellContext`inInst, 
+           Developer`ToPackedArray[
+            N[$CellContext`pts]]]; $CellContext`tetrahedralizeFun[
+          "-E", $CellContext`inInst, $CellContext`outInst]; ((
+          Map[$CellContext`deleteFun, {$CellContext`inInst, \
+$CellContext`outInst}]; #)& )[{
+            $CellContext`getPointsFun[$CellContext`outInst], \
+$CellContext`getFacesFun[$CellContext`outInst] + 1}]]; $CellContext`vd[
+         Condition[
+          Pattern[$CellContext`pts, 
+           Blank[]], Length[$CellContext`pts] > 3]] := 
+       Module[{$CellContext`verts, $CellContext`polys, \
+$CellContext`voronoiverts, $CellContext`segs}, {$CellContext`verts, \
+$CellContext`polys} = $CellContext`ch[$CellContext`pts]; \
+$CellContext`voronoiverts = Map[Normalize, 
+            Apply[
+            Cross[Part[$CellContext`verts, #3] - Part[$CellContext`verts, #], 
+              Part[$CellContext`verts, #2] - 
+              Part[$CellContext`verts, #]]& , $CellContext`polys, {
+             1}]]; $CellContext`segs = Apply[If[Length[
+               Apply[Intersection, 
+                Part[$CellContext`polys, {
+                  SlotSequence[1]}]]] < 2, {}, 
+             ParametricPlot3D[
+              Evaluate[
+               Normalize[
+               Part[$CellContext`voronoiverts, #] $CellContext`t + 
+                Part[$CellContext`voronoiverts, #2] (
+                  1 - $CellContext`t)]], {$CellContext`t, 0, 1}, PlotStyle -> 
+              AbsoluteThickness[2]]]& , 
+            Subsets[
+             Range[
+              Length[$CellContext`polys]], {2}], {1}]; First[
+           Show[$CellContext`segs]]]); Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->323401914]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell["\<\
+This Demonstration generates the Voronoi diagram of points on the unit \
+sphere. This is done using the fact that the Voronoi vertices are the unit \
+normals to the faces of the convex hull. To move the points, hold the Shift \
+key and mouseover the 3D graphic.\
+\>", "ManipulateCaption",
+ CellChangeTimes->{{3.508893075465473*^9, 3.5088930832722535`*^9}, {
+  3.5088931349864244`*^9, 3.5088932615840836`*^9}, {3.5088933516390877`*^9, 
+  3.508893384054329*^9}, {3.5088934752754498`*^9, 3.5088934803609586`*^9}, {
+  3.5088944462515473`*^9, 3.5088944466635885`*^9}, {3.509140056892468*^9, 
+  3.509140070625494*^9}, {3.509464345483364*^9, 3.509464345947609*^9}, {
+  3.5094644124815807`*^9, 3.509464415871539*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 6, $CellContext`nf$$ = 
+    NearestFunction[
+    1, {6, 3}, 3, {{0.21138601287684247`, 0.8601451304970273, 
+     0.8995749695821674, 0.674307164203833, 0.10813016295604487`, 
+     0.2829470043498118}, {-0.9458363090254743, -0.4922991222731766, \
+-0.06057743826564981, 
+     0.5095788553367757, -0.9413711787100058, -0.6443457318757365}, {
+     0.24639324278295227`, -0.13338638870331415`, -0.43254508212949766`, \
+-0.5344522789707667, -0.31957498611943014`, 0.7104643344623213}}, {{
+     0.21138601287684247`, -0.9458363090254743, 0.24639324278295227`}, {
+     0.8601451304970273, -0.4922991222731766, -0.13338638870331415`}, {
+     0.8995749695821674, -0.06057743826564981, -0.43254508212949766`}, {
+     0.674307164203833, 0.5095788553367757, -0.5344522789707667}, {
+     0.10813016295604487`, -0.9413711787100058, -0.31957498611943014`}, {
+     0.2829470043498118, -0.6443457318757365, 0.7104643344623213}}, Automatic,
+      Automatic, 
+     Hold[
+      Nearest[{{0.21138601287684247`, -0.9458363090254743, 
+        0.24639324278295227`}, {
+        0.8601451304970273, -0.4922991222731766, -0.13338638870331415`}, {
+        0.8995749695821674, -0.06057743826564981, -0.43254508212949766`}, {
+        0.674307164203833, 0.5095788553367757, -0.5344522789707667}, {
+        0.10813016295604487`, -0.9413711787100058, -0.31957498611943014`}, {
+        0.2829470043498118, -0.6443457318757365, 0.7104643344623213}} -> 
+       Automatic]]], $CellContext`pp$$ = {{
+    0.21138601287684247`, -0.9458363090254743, 0.24639324278295227`}, {
+    0.8601451304970273, -0.4922991222731766, -0.13338638870331415`}, {
+    0.8995749695821674, -0.06057743826564981, -0.43254508212949766`}, {
+    0.674307164203833, 0.5095788553367757, -0.5344522789707667}, {
+    0.10813016295604487`, -0.9413711787100058, -0.31957498611943014`}, {
+    0.2829470043498118, -0.6443457318757365, 
+    0.7104643344623213}}, $CellContext`s$$ = True, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 6, "number of points"}, 4, 15, 1, 
+      Dynamic[Manipulator[
+        Dynamic[$CellContext`n$$, 
+         If[($CellContext`n$$ = #) < 
+          Length[$CellContext`pp$$], $CellContext`pp$$ = 
+          Take[$CellContext`pp$$, $CellContext`n$$], $CellContext`pp$$ = 
+          Join[$CellContext`pp$$, 
+            Map[Normalize, 
+             RandomReal[
+              
+              NormalDistribution[], {$CellContext`n$$ - 
+               Length[$CellContext`pp$$], 3}]]]]& ], #2, Appearance -> 
+        "Labeled"]& ]}, {{
+       Hold[$CellContext`s$$], True, "fill regions"}, {True, False}}, {{
+       Hold[$CellContext`pp$$], {{0.21138601287684247`, -0.9458363090254743, 
+       0.24639324278295227`}, {
+       0.8601451304970273, -0.4922991222731766, -0.13338638870331415`}, {
+       0.8995749695821674, -0.06057743826564981, -0.43254508212949766`}, {
+       0.674307164203833, 0.5095788553367757, -0.5344522789707667}, {
+       0.10813016295604487`, -0.9413711787100058, -0.31957498611943014`}, {
+       0.2829470043498118, -0.6443457318757365, 0.7104643344623213}}}, 0}, {{
+       Hold[$CellContext`nf$$], 
+       NearestFunction[
+       1, {6, 3}, 3, {{0.21138601287684247`, 0.8601451304970273, 
+        0.8995749695821674, 0.674307164203833, 0.10813016295604487`, 
+        0.2829470043498118}, {-0.9458363090254743, -0.4922991222731766, \
+-0.06057743826564981, 
+        0.5095788553367757, -0.9413711787100058, -0.6443457318757365}, {
+        0.24639324278295227`, -0.13338638870331415`, -0.43254508212949766`, \
+-0.5344522789707667, -0.31957498611943014`, 0.7104643344623213}}, {{
+        0.21138601287684247`, -0.9458363090254743, 0.24639324278295227`}, {
+        0.8601451304970273, -0.4922991222731766, -0.13338638870331415`}, {
+        0.8995749695821674, -0.06057743826564981, -0.43254508212949766`}, {
+        0.674307164203833, 0.5095788553367757, -0.5344522789707667}, {
+        0.10813016295604487`, -0.9413711787100058, -0.31957498611943014`}, {
+        0.2829470043498118, -0.6443457318757365, 0.7104643344623213}}, 
+        Automatic, Automatic, 
+        Hold[
+         Nearest[{{0.21138601287684247`, -0.9458363090254743, 
+           0.24639324278295227`}, {
+           0.8601451304970273, -0.4922991222731766, -0.13338638870331415`}, {
+           0.8995749695821674, -0.06057743826564981, -0.43254508212949766`}, {
+           0.674307164203833, 0.5095788553367757, -0.5344522789707667}, {
+           0.10813016295604487`, -0.9413711787100058, -0.31957498611943014`}, \
+{0.2829470043498118, -0.6443457318757365, 0.7104643344623213}} -> 
+          Automatic]]]}, 0}}, Typeset`size$$ = {368., {198., 202.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`s$17426$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`n$$ = 6, $CellContext`nf$$ = 
+        NearestFunction[
+         1, {6, 3}, 3, {{0.21138601287684247`, 0.8601451304970273, 
+          0.8995749695821674, 0.674307164203833, 0.10813016295604487`, 
+          0.2829470043498118}, {-0.9458363090254743, -0.4922991222731766, \
+-0.06057743826564981, 
+          0.5095788553367757, -0.9413711787100058, -0.6443457318757365}, {
+          0.24639324278295227`, -0.13338638870331415`, -0.43254508212949766`, \
+-0.5344522789707667, -0.31957498611943014`, 0.7104643344623213}}, {{
+          0.21138601287684247`, -0.9458363090254743, 0.24639324278295227`}, {
+          0.8601451304970273, -0.4922991222731766, -0.13338638870331415`}, {
+          0.8995749695821674, -0.06057743826564981, -0.43254508212949766`}, {
+          0.674307164203833, 0.5095788553367757, -0.5344522789707667}, {
+          0.10813016295604487`, -0.9413711787100058, -0.31957498611943014`}, {
+          0.2829470043498118, -0.6443457318757365, 0.7104643344623213}}, 
+          Automatic, Automatic, 
+          Hold[
+           
+           Nearest[{{0.21138601287684247`, -0.9458363090254743, 
+             0.24639324278295227`}, {
+             0.8601451304970273, -0.4922991222731766, -0.13338638870331415`}, \
+{0.8995749695821674, -0.06057743826564981, -0.43254508212949766`}, {
+             0.674307164203833, 0.5095788553367757, -0.5344522789707667}, {
+             0.10813016295604487`, -0.9413711787100058, \
+-0.31957498611943014`}, {0.2829470043498118, -0.6443457318757365, 
+             0.7104643344623213}} -> Automatic]]], $CellContext`pp$$ = {{
+         0.21138601287684247`, -0.9458363090254743, 0.24639324278295227`}, {
+         0.8601451304970273, -0.4922991222731766, -0.13338638870331415`}, {
+         0.8995749695821674, -0.06057743826564981, -0.43254508212949766`}, {
+         0.674307164203833, 0.5095788553367757, -0.5344522789707667}, {
+         0.10813016295604487`, -0.9413711787100058, -0.31957498611943014`}, {
+         0.2829470043498118, -0.6443457318757365, 
+         0.7104643344623213}}, $CellContext`s$$ = True}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`s$$, $CellContext`s$17426$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> EventHandler[
+        Style[
+         Graphics3D[{
+           Dynamic[
+            If[
+             Not[$CellContext`s$$], {
+              Opacity[0.75], 
+              Sphere[]}, $CellContext`nf$$ = 
+              Nearest[$CellContext`pp$$ -> Automatic]; First[
+               
+               ParametricPlot3D[{
+                Cos[$CellContext`u] Sin[$CellContext`v], Sin[$CellContext`u] 
+                 Sin[$CellContext`v], 
+                 Cos[$CellContext`v]}, {$CellContext`v, 0, 
+                 Pi}, {$CellContext`u, 0, 2 Pi}, MaxRecursion -> 
+                ControlActive[1, Automatic], PlotPoints -> 
+                ControlActive[Automatic, 50], MeshStyle -> None, Mesh -> {
+                  Range[3/2, Length[$CellContext`pp$$] - 1/2]}, MeshShading -> 
+                Map[Hue, Range[
+                    Length[$CellContext`pp$$]]/Length[$CellContext`pp$$]], 
+                MeshFunctions -> {First[
+                   $CellContext`nf$$[{#, #2, #3}, 1]]& }]]]], 
+           Dynamic[
+            $CellContext`vd[$CellContext`pp$$]], {Red, 
+            Sphere[
+             Dynamic[$CellContext`pp$$], 0.05]}}, Boxed -> False, PlotRange -> 
+          1.1, Epilog -> Inset[
+            Style["Shift+mouseover", FontColor -> Dynamic[
+               If[
+                CurrentValue["ShiftKey"], Black, Gray]]], {Right, Bottom}, {
+            Right, Bottom}], ImageSize -> {Automatic, 400}, RotationAction -> 
+          "Clip"], Deployed -> Dynamic[
+           CurrentValue["ShiftKey"]]], "MouseMoved" :> If[
+          CurrentValue["ShiftKey"], 
+          ((Part[$CellContext`pp$$, 
+            First[
+             Ordering[
+              Map[
+               Function[$CellContext`pt, 
+                
+                Dot[$CellContext`pt - #, $CellContext`pt - #]], \
+$CellContext`pp$$], 1]]] = #)& )[
+           Normalize[
+            First[
+             MousePosition[
+             "Graphics3DBoxIntercepts", {{-1., -1., -1.}, {1., 1., 1.}}]]]]]],
+       "Specifications" :> {{{$CellContext`n$$, 6, "number of points"}, 4, 15,
+          1, 
+         Dynamic[Manipulator[
+           
+           Dynamic[$CellContext`n$$, 
+            If[($CellContext`n$$ = #) < 
+             Length[$CellContext`pp$$], $CellContext`pp$$ = 
+             Take[$CellContext`pp$$, $CellContext`n$$], $CellContext`pp$$ = 
+             Join[$CellContext`pp$$, 
+               Map[Normalize, 
+                RandomReal[
+                 
+                 NormalDistribution[], {$CellContext`n$$ - 
+                  Length[$CellContext`pp$$], 3}]]]]& ], #2, Appearance -> 
+           "Labeled"]& ]}, {{$CellContext`s$$, True, "fill regions"}, {
+         True, False}, ControlType -> 
+         Checkbox}, {{$CellContext`pp$$, {{
+          0.21138601287684247`, -0.9458363090254743, 0.24639324278295227`}, {
+          0.8601451304970273, -0.4922991222731766, -0.13338638870331415`}, {
+          0.8995749695821674, -0.06057743826564981, -0.43254508212949766`}, {
+          0.674307164203833, 0.5095788553367757, -0.5344522789707667}, {
+          0.10813016295604487`, -0.9413711787100058, -0.31957498611943014`}, {
+          0.2829470043498118, -0.6443457318757365, 0.7104643344623213}}}, 0, 
+         ControlType -> None}, {{$CellContext`nf$$, 
+          NearestFunction[
+          1, {6, 3}, 3, {{0.21138601287684247`, 0.8601451304970273, 
+           0.8995749695821674, 0.674307164203833, 0.10813016295604487`, 
+           0.2829470043498118}, {-0.9458363090254743, -0.4922991222731766, \
+-0.06057743826564981, 
+           0.5095788553367757, -0.9413711787100058, -0.6443457318757365}, {
+           0.24639324278295227`, -0.13338638870331415`, \
+-0.43254508212949766`, -0.5344522789707667, -0.31957498611943014`, 
+           0.7104643344623213}}, {{0.21138601287684247`, -0.9458363090254743, 
+           0.24639324278295227`}, {
+           0.8601451304970273, -0.4922991222731766, -0.13338638870331415`}, {
+           0.8995749695821674, -0.06057743826564981, -0.43254508212949766`}, {
+           0.674307164203833, 0.5095788553367757, -0.5344522789707667}, {
+           0.10813016295604487`, -0.9413711787100058, -0.31957498611943014`}, \
+{0.2829470043498118, -0.6443457318757365, 0.7104643344623213}}, Automatic, 
+           Automatic, 
+           Hold[
+            
+            Nearest[{{0.21138601287684247`, -0.9458363090254743, 
+              0.24639324278295227`}, {
+              0.8601451304970273, -0.4922991222731766, \
+-0.13338638870331415`}, {
+              0.8995749695821674, -0.06057743826564981, \
+-0.43254508212949766`}, {0.674307164203833, 
+              0.5095788553367757, -0.5344522789707667}, {
+              0.10813016295604487`, -0.9413711787100058, \
+-0.31957498611943014`}, {0.2829470043498118, -0.6443457318757365, 
+              0.7104643344623213}} -> Automatic]]]}, 0, ControlType -> None}},
+       "Options" :> {AutorunSequencing -> {2}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{417., {253., 258.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>((
+      With[{$CellContext`$TetGenLibrary = 
+         FileNameJoin[{$InstallationDirectory, "SystemFiles", "Links", 
+            "TetGenLink", "LibraryResources", $SystemID, 
+            StringExpression["tetgenWolfram.", 
+             Which[
+              StringMatchQ[$SystemID, 
+               StringExpression["Windows", 
+                BlankNullSequence[]]], "dll", 
+              StringMatchQ[$SystemID, 
+               StringExpression["Mac", 
+                BlankNullSequence[]]], "dylib", 
+              Blank[], "so"]]}]}, $CellContext`instanceFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, 
+           "newTetGenInstance", {}, Integer]; $CellContext`setPointsFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, "setPointList", {
+           Integer, {Real, 2, "Shared"}}, 
+           Integer]; $CellContext`tetrahedralizeFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, "tetrahedralizeFun",
+            LinkObject, LinkObject]; $CellContext`getPointsFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, "getPointList", {
+           Integer}, {Real, 
+            Blank[]}]; $CellContext`getFacesFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, "getFaces", {
+           Integer}, {Integer, 2}]; $CellContext`deleteFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, 
+           "deleteTetGenInstance", {Integer}, Integer]]; $CellContext`ch[
+         Pattern[$CellContext`pts, 
+          Blank[]]] := 
+       Module[{$CellContext`inInst, $CellContext`outInst}, \
+{$CellContext`inInst, $CellContext`outInst} = 
+          Apply[$CellContext`instanceFun, {{}, {}}, {
+            1}]; $CellContext`setPointsFun[$CellContext`inInst, 
+           Developer`ToPackedArray[
+            N[$CellContext`pts]]]; $CellContext`tetrahedralizeFun[
+          "-E", $CellContext`inInst, $CellContext`outInst]; ((
+          Map[$CellContext`deleteFun, {$CellContext`inInst, \
+$CellContext`outInst}]; #)& )[{
+            $CellContext`getPointsFun[$CellContext`outInst], \
+$CellContext`getFacesFun[$CellContext`outInst] + 1}]]; $CellContext`vd[
+         Condition[
+          Pattern[$CellContext`pts, 
+           Blank[]], Length[$CellContext`pts] > 3]] := 
+       Module[{$CellContext`verts, $CellContext`polys, \
+$CellContext`voronoiverts, $CellContext`segs}, {$CellContext`verts, \
+$CellContext`polys} = $CellContext`ch[$CellContext`pts]; \
+$CellContext`voronoiverts = Map[Normalize, 
+            Apply[
+            Cross[Part[$CellContext`verts, #3] - Part[$CellContext`verts, #], 
+              Part[$CellContext`verts, #2] - 
+              Part[$CellContext`verts, #]]& , $CellContext`polys, {
+             1}]]; $CellContext`segs = Apply[If[Length[
+               Apply[Intersection, 
+                Part[$CellContext`polys, {
+                  SlotSequence[1]}]]] < 2, {}, 
+             ParametricPlot3D[
+              Evaluate[
+               Normalize[
+               Part[$CellContext`voronoiverts, #] $CellContext`t + 
+                Part[$CellContext`voronoiverts, #2] (
+                  1 - $CellContext`t)]], {$CellContext`t, 0, 1}, PlotStyle -> 
+              AbsoluteThickness[2]]]& , 
+            Subsets[
+             Range[
+              Length[$CellContext`polys]], {2}], {1}]; First[
+           Show[$CellContext`segs]]]); Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->165937451]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 4, $CellContext`nf$$ = 
+    0, $CellContext`pp$$ = {{0.9607491284090599, -0.053672944752939794`, 
+    0.2721770145746691}, {0.8995138614802954, -0.4363855932712328, 
+    0.021033948514780944`}, {0.9971011205903095, 
+    0.05915357565263944, -0.04785613654544863}, {
+    0.8793269553367641, -0.21701158427497413`, 
+    0.4238986646695671}}, $CellContext`s$$ = False, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 4, "number of points"}, 4, 15, 1, 
+      Dynamic[Manipulator[
+        Dynamic[$CellContext`n$$, 
+         If[($CellContext`n$$ = #) < 
+          Length[$CellContext`pp$$], $CellContext`pp$$ = 
+          Take[$CellContext`pp$$, $CellContext`n$$], $CellContext`pp$$ = 
+          Join[$CellContext`pp$$, 
+            Map[Normalize, 
+             RandomReal[
+              
+              NormalDistribution[], {$CellContext`n$$ - 
+               Length[$CellContext`pp$$], 3}]]]]& ], #2, Appearance -> 
+        "Labeled"]& ]}, {{
+       Hold[$CellContext`s$$], False, "fill regions"}, {True, False}}, {{
+       Hold[$CellContext`pp$$], {{0.9607491284090599, -0.053672944752939794`, 
+       0.2721770145746691}, {0.8995138614802954, -0.4363855932712328, 
+       0.021033948514780944`}, {0.9971011205903095, 
+       0.05915357565263944, -0.04785613654544863}, {
+       0.8793269553367641, -0.21701158427497413`, 0.4238986646695671}}}, 0}, {
+      Hold[$CellContext`nf$$], 0}}, Typeset`size$$ = {368., {198., 202.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`s$17483$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`n$$ = 4, $CellContext`nf$$ = 
+        0, $CellContext`pp$$ = {{0.9607491284090599, -0.053672944752939794`, 
+         0.2721770145746691}, {0.8995138614802954, -0.4363855932712328, 
+         0.021033948514780944`}, {0.9971011205903095, 
+         0.05915357565263944, -0.04785613654544863}, {
+         0.8793269553367641, -0.21701158427497413`, 
+         0.4238986646695671}}, $CellContext`s$$ = False}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`s$$, $CellContext`s$17483$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> EventHandler[
+        Style[
+         Graphics3D[{
+           Dynamic[
+            If[
+             Not[$CellContext`s$$], {
+              Opacity[0.75], 
+              Sphere[]}, $CellContext`nf$$ = 
+              Nearest[$CellContext`pp$$ -> Automatic]; First[
+               
+               ParametricPlot3D[{
+                Cos[$CellContext`u] Sin[$CellContext`v], Sin[$CellContext`u] 
+                 Sin[$CellContext`v], 
+                 Cos[$CellContext`v]}, {$CellContext`v, 0, 
+                 Pi}, {$CellContext`u, 0, 2 Pi}, MaxRecursion -> 
+                ControlActive[1, Automatic], PlotPoints -> 
+                ControlActive[Automatic, 50], MeshStyle -> None, Mesh -> {
+                  Range[3/2, Length[$CellContext`pp$$] - 1/2]}, MeshShading -> 
+                Map[Hue, Range[
+                    Length[$CellContext`pp$$]]/Length[$CellContext`pp$$]], 
+                MeshFunctions -> {First[
+                   $CellContext`nf$$[{#, #2, #3}, 1]]& }]]]], 
+           Dynamic[
+            $CellContext`vd[$CellContext`pp$$]], {Red, 
+            Sphere[
+             Dynamic[$CellContext`pp$$], 0.05]}}, Boxed -> False, PlotRange -> 
+          1.1, Epilog -> Inset[
+            Style["Shift+mouseover", FontColor -> Dynamic[
+               If[
+                CurrentValue["ShiftKey"], Black, Gray]]], {Right, Bottom}, {
+            Right, Bottom}], ImageSize -> {Automatic, 400}, RotationAction -> 
+          "Clip"], Deployed -> Dynamic[
+           CurrentValue["ShiftKey"]]], "MouseMoved" :> If[
+          CurrentValue["ShiftKey"], 
+          ((Part[$CellContext`pp$$, 
+            First[
+             Ordering[
+              Map[
+               Function[$CellContext`pt, 
+                
+                Dot[$CellContext`pt - #, $CellContext`pt - #]], \
+$CellContext`pp$$], 1]]] = #)& )[
+           Normalize[
+            First[
+             MousePosition[
+             "Graphics3DBoxIntercepts", {{-1., -1., -1.}, {1., 1., 1.}}]]]]]],
+       "Specifications" :> {{{$CellContext`n$$, 4, "number of points"}, 4, 15,
+          1, 
+         Dynamic[Manipulator[
+           
+           Dynamic[$CellContext`n$$, 
+            If[($CellContext`n$$ = #) < 
+             Length[$CellContext`pp$$], $CellContext`pp$$ = 
+             Take[$CellContext`pp$$, $CellContext`n$$], $CellContext`pp$$ = 
+             Join[$CellContext`pp$$, 
+               Map[Normalize, 
+                RandomReal[
+                 
+                 NormalDistribution[], {$CellContext`n$$ - 
+                  Length[$CellContext`pp$$], 3}]]]]& ], #2, Appearance -> 
+           "Labeled"]& ]}, {{$CellContext`s$$, False, "fill regions"}, {
+         True, False}, ControlType -> 
+         Checkbox}, {{$CellContext`pp$$, {{
+          0.9607491284090599, -0.053672944752939794`, 0.2721770145746691}, {
+          0.8995138614802954, -0.4363855932712328, 0.021033948514780944`}, {
+          0.9971011205903095, 0.05915357565263944, -0.04785613654544863}, {
+          0.8793269553367641, -0.21701158427497413`, 0.4238986646695671}}}, 0,
+          ControlType -> None}, {$CellContext`nf$$, 0, ControlType -> None}}, 
+      "Options" :> {AutorunSequencing -> {2}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{417., {253., 258.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>((
+      With[{$CellContext`$TetGenLibrary = 
+         FileNameJoin[{$InstallationDirectory, "SystemFiles", "Links", 
+            "TetGenLink", "LibraryResources", $SystemID, 
+            StringExpression["tetgenWolfram.", 
+             Which[
+              StringMatchQ[$SystemID, 
+               StringExpression["Windows", 
+                BlankNullSequence[]]], "dll", 
+              StringMatchQ[$SystemID, 
+               StringExpression["Mac", 
+                BlankNullSequence[]]], "dylib", 
+              Blank[], "so"]]}]}, $CellContext`instanceFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, 
+           "newTetGenInstance", {}, Integer]; $CellContext`setPointsFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, "setPointList", {
+           Integer, {Real, 2, "Shared"}}, 
+           Integer]; $CellContext`tetrahedralizeFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, "tetrahedralizeFun",
+            LinkObject, LinkObject]; $CellContext`getPointsFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, "getPointList", {
+           Integer}, {Real, 
+            Blank[]}]; $CellContext`getFacesFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, "getFaces", {
+           Integer}, {Integer, 2}]; $CellContext`deleteFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, 
+           "deleteTetGenInstance", {Integer}, Integer]]; $CellContext`ch[
+         Pattern[$CellContext`pts, 
+          Blank[]]] := 
+       Module[{$CellContext`inInst, $CellContext`outInst}, \
+{$CellContext`inInst, $CellContext`outInst} = 
+          Apply[$CellContext`instanceFun, {{}, {}}, {
+            1}]; $CellContext`setPointsFun[$CellContext`inInst, 
+           Developer`ToPackedArray[
+            N[$CellContext`pts]]]; $CellContext`tetrahedralizeFun[
+          "-E", $CellContext`inInst, $CellContext`outInst]; ((
+          Map[$CellContext`deleteFun, {$CellContext`inInst, \
+$CellContext`outInst}]; #)& )[{
+            $CellContext`getPointsFun[$CellContext`outInst], \
+$CellContext`getFacesFun[$CellContext`outInst] + 1}]]; $CellContext`vd[
+         Condition[
+          Pattern[$CellContext`pts, 
+           Blank[]], Length[$CellContext`pts] > 3]] := 
+       Module[{$CellContext`verts, $CellContext`polys, \
+$CellContext`voronoiverts, $CellContext`segs}, {$CellContext`verts, \
+$CellContext`polys} = $CellContext`ch[$CellContext`pts]; \
+$CellContext`voronoiverts = Map[Normalize, 
+            Apply[
+            Cross[Part[$CellContext`verts, #3] - Part[$CellContext`verts, #], 
+              Part[$CellContext`verts, #2] - 
+              Part[$CellContext`verts, #]]& , $CellContext`polys, {
+             1}]]; $CellContext`segs = Apply[If[Length[
+               Apply[Intersection, 
+                Part[$CellContext`polys, {
+                  SlotSequence[1]}]]] < 2, {}, 
+             ParametricPlot3D[
+              Evaluate[
+               Normalize[
+               Part[$CellContext`voronoiverts, #] $CellContext`t + 
+                Part[$CellContext`voronoiverts, #2] (
+                  1 - $CellContext`t)]], {$CellContext`t, 0, 1}, PlotStyle -> 
+              AbsoluteThickness[2]]]& , 
+            Subsets[
+             Range[
+              Length[$CellContext`polys]], {2}], {1}]; First[
+           Show[$CellContext`segs]]]); Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->125247575],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 8, $CellContext`nf$$ = 
+    NearestFunction[
+    1, {7, 3}, 3, {{-0.31837865286628647`, 0.9397722261358067, 
+     0.23924704207376232`, 0.4880321307807278, -0.949676428441185, 
+     0.7639376458709471, 0.6826116230694312}, {0.39540779179126845`, 
+     0.005485133654585586, -0.2930292118844929, -0.7246980893240147, 
+     0.16253323132857833`, 0.19776069081571643`, 
+     0.6004079990949603}, {-0.8615612059452313, -0.3417573353895149, 
+     0.9256860881753102, -0.4864538196537723, -0.2677641312369632, 
+     0.6142393526869198, 0.4165952552217838}}, {{-0.31837865286628647`, 
+     0.39540779179126845`, -0.8615612059452313}, {0.9397722261358067, 
+     0.005485133654585586, -0.3417573353895149}, {
+     0.23924704207376232`, -0.2930292118844929, 0.9256860881753102}, {
+     0.4880321307807278, -0.7246980893240147, -0.4864538196537723}, \
+{-0.949676428441185, 0.16253323132857833`, -0.2677641312369632}, {
+     0.7639376458709471, 0.19776069081571643`, 0.6142393526869198}, {
+     0.6826116230694312, 0.6004079990949603, 0.4165952552217838}}, Automatic, 
+     Automatic, 
+     Hold[
+      Nearest[{{-0.31837865286628647`, 
+        0.39540779179126845`, -0.8615612059452313}, {0.9397722261358067, 
+        0.005485133654585586, -0.3417573353895149}, {
+        0.23924704207376232`, -0.2930292118844929, 0.9256860881753102}, {
+        0.4880321307807278, -0.7246980893240147, -0.4864538196537723}, \
+{-0.949676428441185, 0.16253323132857833`, -0.2677641312369632}, {
+        0.7639376458709471, 0.19776069081571643`, 0.6142393526869198}, {
+        0.6826116230694312, 0.6004079990949603, 0.4165952552217838}} -> 
+       Automatic]]], $CellContext`pp$$ = {{-0.31837865286628647`, 
+    0.39540779179126845`, -0.8615612059452313}, {0.9397722261358067, 
+    0.005485133654585586, -0.3417573353895149}, {
+    0.23924704207376232`, -0.2930292118844929, 0.9256860881753102}, {
+    0.4880321307807278, -0.7246980893240147, -0.4864538196537723}, \
+{-0.949676428441185, 0.16253323132857833`, -0.2677641312369632}, {
+    0.7639376458709471, 0.19776069081571643`, 0.6142393526869198}, {
+    0.6826116230694312, 0.6004079990949603, 
+    0.4165952552217838}, {-0.7890852399134409, -0.6034150919653998, 
+    0.11504221372668348`}}, $CellContext`s$$ = False, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 8, "number of points"}, 4, 15, 1, 
+      Dynamic[Manipulator[
+        Dynamic[$CellContext`n$$, 
+         If[($CellContext`n$$ = #) < 
+          Length[$CellContext`pp$$], $CellContext`pp$$ = 
+          Take[$CellContext`pp$$, $CellContext`n$$], $CellContext`pp$$ = 
+          Join[$CellContext`pp$$, 
+            Map[Normalize, 
+             RandomReal[
+              
+              NormalDistribution[], {$CellContext`n$$ - 
+               Length[$CellContext`pp$$], 3}]]]]& ], #2, Appearance -> 
+        "Labeled"]& ]}, {{
+       Hold[$CellContext`s$$], False, "fill regions"}, {True, False}}, {{
+       Hold[$CellContext`pp$$], {{-0.31837865286628647`, 
+       0.39540779179126845`, -0.8615612059452313}, {0.9397722261358067, 
+       0.005485133654585586, -0.3417573353895149}, {
+       0.23924704207376232`, -0.2930292118844929, 0.9256860881753102}, {
+       0.4880321307807278, -0.7246980893240147, -0.4864538196537723}, \
+{-0.949676428441185, 0.16253323132857833`, -0.2677641312369632}, {
+       0.7639376458709471, 0.19776069081571643`, 0.6142393526869198}, {
+       0.6826116230694312, 0.6004079990949603, 
+       0.4165952552217838}, {-0.7890852399134409, -0.6034150919653998, 
+       0.11504221372668348`}}}, 0}, {{
+       Hold[$CellContext`nf$$], 
+       NearestFunction[
+       1, {7, 3}, 3, {{-0.31837865286628647`, 0.9397722261358067, 
+        0.23924704207376232`, 0.4880321307807278, -0.949676428441185, 
+        0.7639376458709471, 0.6826116230694312}, {0.39540779179126845`, 
+        0.005485133654585586, -0.2930292118844929, -0.7246980893240147, 
+        0.16253323132857833`, 0.19776069081571643`, 
+        0.6004079990949603}, {-0.8615612059452313, -0.3417573353895149, 
+        0.9256860881753102, -0.4864538196537723, -0.2677641312369632, 
+        0.6142393526869198, 0.4165952552217838}}, {{-0.31837865286628647`, 
+        0.39540779179126845`, -0.8615612059452313}, {0.9397722261358067, 
+        0.005485133654585586, -0.3417573353895149}, {
+        0.23924704207376232`, -0.2930292118844929, 0.9256860881753102}, {
+        0.4880321307807278, -0.7246980893240147, -0.4864538196537723}, \
+{-0.949676428441185, 0.16253323132857833`, -0.2677641312369632}, {
+        0.7639376458709471, 0.19776069081571643`, 0.6142393526869198}, {
+        0.6826116230694312, 0.6004079990949603, 0.4165952552217838}}, 
+        Automatic, Automatic, 
+        Hold[
+         Nearest[{{-0.31837865286628647`, 
+           0.39540779179126845`, -0.8615612059452313}, {0.9397722261358067, 
+           0.005485133654585586, -0.3417573353895149}, {
+           0.23924704207376232`, -0.2930292118844929, 0.9256860881753102}, {
+           0.4880321307807278, -0.7246980893240147, -0.4864538196537723}, \
+{-0.949676428441185, 0.16253323132857833`, -0.2677641312369632}, {
+           0.7639376458709471, 0.19776069081571643`, 0.6142393526869198}, {
+           0.6826116230694312, 0.6004079990949603, 0.4165952552217838}} -> 
+          Automatic]]]}, 0}}, Typeset`size$$ = {368., {198., 202.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`s$17540$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`n$$ = 8, $CellContext`nf$$ = 
+        NearestFunction[
+         1, {7, 3}, 3, {{-0.31837865286628647`, 0.9397722261358067, 
+          0.23924704207376232`, 0.4880321307807278, -0.949676428441185, 
+          0.7639376458709471, 0.6826116230694312}, {0.39540779179126845`, 
+          0.005485133654585586, -0.2930292118844929, -0.7246980893240147, 
+          0.16253323132857833`, 0.19776069081571643`, 
+          0.6004079990949603}, {-0.8615612059452313, -0.3417573353895149, 
+          0.9256860881753102, -0.4864538196537723, -0.2677641312369632, 
+          0.6142393526869198, 0.4165952552217838}}, {{-0.31837865286628647`, 
+          0.39540779179126845`, -0.8615612059452313}, {0.9397722261358067, 
+          0.005485133654585586, -0.3417573353895149}, {
+          0.23924704207376232`, -0.2930292118844929, 0.9256860881753102}, {
+          0.4880321307807278, -0.7246980893240147, -0.4864538196537723}, \
+{-0.949676428441185, 0.16253323132857833`, -0.2677641312369632}, {
+          0.7639376458709471, 0.19776069081571643`, 0.6142393526869198}, {
+          0.6826116230694312, 0.6004079990949603, 0.4165952552217838}}, 
+          Automatic, Automatic, 
+          Hold[
+           
+           Nearest[{{-0.31837865286628647`, 
+             0.39540779179126845`, -0.8615612059452313}, {0.9397722261358067, 
+             0.005485133654585586, -0.3417573353895149}, {
+             0.23924704207376232`, -0.2930292118844929, 0.9256860881753102}, {
+             0.4880321307807278, -0.7246980893240147, -0.4864538196537723}, \
+{-0.949676428441185, 0.16253323132857833`, -0.2677641312369632}, {
+             0.7639376458709471, 0.19776069081571643`, 0.6142393526869198}, {
+             0.6826116230694312, 0.6004079990949603, 0.4165952552217838}} -> 
+            Automatic]]], $CellContext`pp$$ = {{-0.31837865286628647`, 
+         0.39540779179126845`, -0.8615612059452313}, {0.9397722261358067, 
+         0.005485133654585586, -0.3417573353895149}, {
+         0.23924704207376232`, -0.2930292118844929, 0.9256860881753102}, {
+         0.4880321307807278, -0.7246980893240147, -0.4864538196537723}, \
+{-0.949676428441185, 0.16253323132857833`, -0.2677641312369632}, {
+         0.7639376458709471, 0.19776069081571643`, 0.6142393526869198}, {
+         0.6826116230694312, 0.6004079990949603, 
+         0.4165952552217838}, {-0.7890852399134409, -0.6034150919653998, 
+         0.11504221372668348`}}, $CellContext`s$$ = False}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`s$$, $CellContext`s$17540$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> EventHandler[
+        Style[
+         Graphics3D[{
+           Dynamic[
+            If[
+             Not[$CellContext`s$$], {
+              Opacity[0.75], 
+              Sphere[]}, $CellContext`nf$$ = 
+              Nearest[$CellContext`pp$$ -> Automatic]; First[
+               
+               ParametricPlot3D[{
+                Cos[$CellContext`u] Sin[$CellContext`v], Sin[$CellContext`u] 
+                 Sin[$CellContext`v], 
+                 Cos[$CellContext`v]}, {$CellContext`v, 0, 
+                 Pi}, {$CellContext`u, 0, 2 Pi}, MaxRecursion -> 
+                ControlActive[1, Automatic], PlotPoints -> 
+                ControlActive[Automatic, 50], MeshStyle -> None, Mesh -> {
+                  Range[3/2, Length[$CellContext`pp$$] - 1/2]}, MeshShading -> 
+                Map[Hue, Range[
+                    Length[$CellContext`pp$$]]/Length[$CellContext`pp$$]], 
+                MeshFunctions -> {First[
+                   $CellContext`nf$$[{#, #2, #3}, 1]]& }]]]], 
+           Dynamic[
+            $CellContext`vd[$CellContext`pp$$]], {Red, 
+            Sphere[
+             Dynamic[$CellContext`pp$$], 0.05]}}, Boxed -> False, PlotRange -> 
+          1.1, Epilog -> Inset[
+            Style["Shift+mouseover", FontColor -> Dynamic[
+               If[
+                CurrentValue["ShiftKey"], Black, Gray]]], {Right, Bottom}, {
+            Right, Bottom}], ImageSize -> {Automatic, 400}, RotationAction -> 
+          "Clip"], Deployed -> Dynamic[
+           CurrentValue["ShiftKey"]]], "MouseMoved" :> If[
+          CurrentValue["ShiftKey"], 
+          ((Part[$CellContext`pp$$, 
+            First[
+             Ordering[
+              Map[
+               Function[$CellContext`pt, 
+                
+                Dot[$CellContext`pt - #, $CellContext`pt - #]], \
+$CellContext`pp$$], 1]]] = #)& )[
+           Normalize[
+            First[
+             MousePosition[
+             "Graphics3DBoxIntercepts", {{-1., -1., -1.}, {1., 1., 1.}}]]]]]],
+       "Specifications" :> {{{$CellContext`n$$, 8, "number of points"}, 4, 15,
+          1, 
+         Dynamic[Manipulator[
+           
+           Dynamic[$CellContext`n$$, 
+            If[($CellContext`n$$ = #) < 
+             Length[$CellContext`pp$$], $CellContext`pp$$ = 
+             Take[$CellContext`pp$$, $CellContext`n$$], $CellContext`pp$$ = 
+             Join[$CellContext`pp$$, 
+               Map[Normalize, 
+                RandomReal[
+                 
+                 NormalDistribution[], {$CellContext`n$$ - 
+                  Length[$CellContext`pp$$], 3}]]]]& ], #2, Appearance -> 
+           "Labeled"]& ]}, {{$CellContext`s$$, False, "fill regions"}, {
+         True, False}, ControlType -> 
+         Checkbox}, {{$CellContext`pp$$, {{-0.31837865286628647`, 
+          0.39540779179126845`, -0.8615612059452313}, {0.9397722261358067, 
+          0.005485133654585586, -0.3417573353895149}, {
+          0.23924704207376232`, -0.2930292118844929, 0.9256860881753102}, {
+          0.4880321307807278, -0.7246980893240147, -0.4864538196537723}, \
+{-0.949676428441185, 0.16253323132857833`, -0.2677641312369632}, {
+          0.7639376458709471, 0.19776069081571643`, 0.6142393526869198}, {
+          0.6826116230694312, 0.6004079990949603, 
+          0.4165952552217838}, {-0.7890852399134409, -0.6034150919653998, 
+          0.11504221372668348`}}}, 0, ControlType -> 
+         None}, {{$CellContext`nf$$, 
+          NearestFunction[
+          1, {7, 3}, 3, {{-0.31837865286628647`, 0.9397722261358067, 
+           0.23924704207376232`, 0.4880321307807278, -0.949676428441185, 
+           0.7639376458709471, 0.6826116230694312}, {0.39540779179126845`, 
+           0.005485133654585586, -0.2930292118844929, -0.7246980893240147, 
+           0.16253323132857833`, 0.19776069081571643`, 
+           0.6004079990949603}, {-0.8615612059452313, -0.3417573353895149, 
+           0.9256860881753102, -0.4864538196537723, -0.2677641312369632, 
+           0.6142393526869198, 0.4165952552217838}}, {{-0.31837865286628647`, 
+           0.39540779179126845`, -0.8615612059452313}, {0.9397722261358067, 
+           0.005485133654585586, -0.3417573353895149}, {
+           0.23924704207376232`, -0.2930292118844929, 0.9256860881753102}, {
+           0.4880321307807278, -0.7246980893240147, -0.4864538196537723}, \
+{-0.949676428441185, 0.16253323132857833`, -0.2677641312369632}, {
+           0.7639376458709471, 0.19776069081571643`, 0.6142393526869198}, {
+           0.6826116230694312, 0.6004079990949603, 0.4165952552217838}}, 
+           Automatic, Automatic, 
+           Hold[
+            
+            Nearest[{{-0.31837865286628647`, 
+              0.39540779179126845`, -0.8615612059452313}, {0.9397722261358067,
+               0.005485133654585586, -0.3417573353895149}, {
+              0.23924704207376232`, -0.2930292118844929, 
+              0.9256860881753102}, {
+              0.4880321307807278, -0.7246980893240147, -0.4864538196537723}, \
+{-0.949676428441185, 0.16253323132857833`, -0.2677641312369632}, {
+              0.7639376458709471, 0.19776069081571643`, 0.6142393526869198}, {
+              0.6826116230694312, 0.6004079990949603, 0.4165952552217838}} -> 
+             Automatic]]]}, 0, ControlType -> None}}, 
+      "Options" :> {AutorunSequencing -> {2}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{417., {253., 258.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>((
+      With[{$CellContext`$TetGenLibrary = 
+         FileNameJoin[{$InstallationDirectory, "SystemFiles", "Links", 
+            "TetGenLink", "LibraryResources", $SystemID, 
+            StringExpression["tetgenWolfram.", 
+             Which[
+              StringMatchQ[$SystemID, 
+               StringExpression["Windows", 
+                BlankNullSequence[]]], "dll", 
+              StringMatchQ[$SystemID, 
+               StringExpression["Mac", 
+                BlankNullSequence[]]], "dylib", 
+              Blank[], "so"]]}]}, $CellContext`instanceFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, 
+           "newTetGenInstance", {}, Integer]; $CellContext`setPointsFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, "setPointList", {
+           Integer, {Real, 2, "Shared"}}, 
+           Integer]; $CellContext`tetrahedralizeFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, "tetrahedralizeFun",
+            LinkObject, LinkObject]; $CellContext`getPointsFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, "getPointList", {
+           Integer}, {Real, 
+            Blank[]}]; $CellContext`getFacesFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, "getFaces", {
+           Integer}, {Integer, 2}]; $CellContext`deleteFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, 
+           "deleteTetGenInstance", {Integer}, Integer]]; $CellContext`ch[
+         Pattern[$CellContext`pts, 
+          Blank[]]] := 
+       Module[{$CellContext`inInst, $CellContext`outInst}, \
+{$CellContext`inInst, $CellContext`outInst} = 
+          Apply[$CellContext`instanceFun, {{}, {}}, {
+            1}]; $CellContext`setPointsFun[$CellContext`inInst, 
+           Developer`ToPackedArray[
+            N[$CellContext`pts]]]; $CellContext`tetrahedralizeFun[
+          "-E", $CellContext`inInst, $CellContext`outInst]; ((
+          Map[$CellContext`deleteFun, {$CellContext`inInst, \
+$CellContext`outInst}]; #)& )[{
+            $CellContext`getPointsFun[$CellContext`outInst], \
+$CellContext`getFacesFun[$CellContext`outInst] + 1}]]; $CellContext`vd[
+         Condition[
+          Pattern[$CellContext`pts, 
+           Blank[]], Length[$CellContext`pts] > 3]] := 
+       Module[{$CellContext`verts, $CellContext`polys, \
+$CellContext`voronoiverts, $CellContext`segs}, {$CellContext`verts, \
+$CellContext`polys} = $CellContext`ch[$CellContext`pts]; \
+$CellContext`voronoiverts = Map[Normalize, 
+            Apply[
+            Cross[Part[$CellContext`verts, #3] - Part[$CellContext`verts, #], 
+              Part[$CellContext`verts, #2] - 
+              Part[$CellContext`verts, #]]& , $CellContext`polys, {
+             1}]]; $CellContext`segs = Apply[If[Length[
+               Apply[Intersection, 
+                Part[$CellContext`polys, {
+                  SlotSequence[1]}]]] < 2, {}, 
+             ParametricPlot3D[
+              Evaluate[
+               Normalize[
+               Part[$CellContext`voronoiverts, #] $CellContext`t + 
+                Part[$CellContext`voronoiverts, #2] (
+                  1 - $CellContext`t)]], {$CellContext`t, 0, 1}, PlotStyle -> 
+              AbsoluteThickness[2]]]& , 
+            Subsets[
+             Range[
+              Length[$CellContext`polys]], {2}], {1}]; First[
+           Show[$CellContext`segs]]]); Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->91479619],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 15, $CellContext`nf$$ = 
+    NearestFunction[1, {15, 3}, 3, CompressedData["
+1:eJwBeQGG/iFib1JlAgAAAAMAAAAPAAAA9YTLko1S6j/yDwHyvq7mPyF9qM0Y
+0de/GOKHgdc5x7+Nc5roRXPqP1PtNoTInLs/+nj7psIM4z802cRRO5PUv+SW
+uLCz6uC/JGxM0QW27L9f4A2G0xOFv8NrH1A4T+K/jTTgeNDjsj8uHivWI87u
+PyBYRWzPZZK/4eevg1VI2j/LFuYfN8Tjv/XXnCZpc+U/yfM2TTl8xz/FJUE3
+rozhP9HyJk7v1dm//xvfeZiD4L8ydJjic4fDv0SiiGFWDOs/SpDX9xHt279w
+GPtFjmHbP8Tdvudpp+c/WBls1Pmx77980/PH5RXRvzwwl+Dmn++/oiH6DJQs
+2T/d/SkLP8zVvza+N+c9i+S/TexAIY3q7j8grljWaTLAP5vW0v+VEu2/oPyF
+niW14z8vJ2twxOftv11RTzt18rM/Gyi+zxFdsT9Glmz07+vsv6cVbFPtvNY/
+Gqz/a13CvT+QUPMq7fSmP8SZu4igacM/s+DMqQ==
+     "], CompressedData["
+1:eJwBeQGG/iFib1JlAgAAAA8AAAADAAAA9YTLko1S6j/h56+DVUjaP6Ih+gyU
+LNk/8g8B8r6u5j/LFuYfN8Tjv939KQs/zNW/IX2ozRjR17/115wmaXPlPza+
+N+c9i+S/GOKHgdc5x7/J8zZNOXzHP03sQCGN6u4/jXOa6EVz6j/FJUE3rozh
+PyCuWNZpMsA/U+02hMicuz/R8iZO79XZv5vW0v+VEu2/+nj7psIM4z//G995
+mIPgv6D8hZ4lteM/NNnEUTuT1L8ydJjic4fDvy8na3DE5+2/5Ja4sLPq4L9E
+oohhVgzrP11RTzt18rM/JGxM0QW27L9KkNf3Ee3bvxsovs8RXbE/X+ANhtMT
+hb9wGPtFjmHbP0aWbPTv6+y/w2sfUDhP4r/E3b7naafnP6cVbFPtvNY/jTTg
+eNDjsj9YGWzU+bHvvxqs/2tdwr0/Lh4r1iPO7j980/PH5RXRv5BQ8yrt9KY/
+IFhFbM9lkr88MJfg5p/vv8SZu4igacM/HlDMqQ==
+     "], Automatic, Automatic, 
+     Hold[
+      Nearest[CompressedData["
+1:eJwBeQGG/iFib1JlAgAAAA8AAAADAAAA9YTLko1S6j/h56+DVUjaP6Ih+gyU
+LNk/8g8B8r6u5j/LFuYfN8Tjv939KQs/zNW/IX2ozRjR17/115wmaXPlPza+
+N+c9i+S/GOKHgdc5x7/J8zZNOXzHP03sQCGN6u4/jXOa6EVz6j/FJUE3rozh
+PyCuWNZpMsA/U+02hMicuz/R8iZO79XZv5vW0v+VEu2/+nj7psIM4z//G995
+mIPgv6D8hZ4lteM/NNnEUTuT1L8ydJjic4fDvy8na3DE5+2/5Ja4sLPq4L9E
+oohhVgzrP11RTzt18rM/JGxM0QW27L9KkNf3Ee3bvxsovs8RXbE/X+ANhtMT
+hb9wGPtFjmHbP0aWbPTv6+y/w2sfUDhP4r/E3b7naafnP6cVbFPtvNY/jTTg
+eNDjsj9YGWzU+bHvvxqs/2tdwr0/Lh4r1iPO7j980/PH5RXRv5BQ8yrt9KY/
+IFhFbM9lkr88MJfg5p/vv8SZu4igacM/HlDMqQ==
+        "] -> Automatic]]], $CellContext`pp$$ = CompressedData["
+1:eJwBeQGG/iFib1JlAgAAAA8AAAADAAAA9YTLko1S6j/h56+DVUjaP6Ih+gyU
+LNk/8g8B8r6u5j/LFuYfN8Tjv939KQs/zNW/IX2ozRjR17/115wmaXPlPza+
+N+c9i+S/GOKHgdc5x7/J8zZNOXzHP03sQCGN6u4/jXOa6EVz6j/FJUE3rozh
+PyCuWNZpMsA/U+02hMicuz/R8iZO79XZv5vW0v+VEu2/+nj7psIM4z//G995
+mIPgv6D8hZ4lteM/NNnEUTuT1L8ydJjic4fDvy8na3DE5+2/5Ja4sLPq4L9E
+oohhVgzrP11RTzt18rM/JGxM0QW27L9KkNf3Ee3bvxsovs8RXbE/X+ANhtMT
+hb9wGPtFjmHbP0aWbPTv6+y/w2sfUDhP4r/E3b7naafnP6cVbFPtvNY/jTTg
+eNDjsj9YGWzU+bHvvxqs/2tdwr0/Lh4r1iPO7j980/PH5RXRv5BQ8yrt9KY/
+IFhFbM9lkr88MJfg5p/vv8SZu4igacM/HlDMqQ==
+    "], $CellContext`s$$ = True, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 15, "number of points"}, 4, 15, 1, 
+      Dynamic[Manipulator[
+        Dynamic[$CellContext`n$$, 
+         If[($CellContext`n$$ = #) < 
+          Length[$CellContext`pp$$], $CellContext`pp$$ = 
+          Take[$CellContext`pp$$, $CellContext`n$$], $CellContext`pp$$ = 
+          Join[$CellContext`pp$$, 
+            Map[Normalize, 
+             RandomReal[
+              
+              NormalDistribution[], {$CellContext`n$$ - 
+               Length[$CellContext`pp$$], 3}]]]]& ], #2, Appearance -> 
+        "Labeled"]& ]}, {{
+       Hold[$CellContext`s$$], True, "fill regions"}, {True, False}}, {{
+       Hold[$CellContext`pp$$], CompressedData["
+1:eJwBeQGG/iFib1JlAgAAAA8AAAADAAAA9YTLko1S6j/h56+DVUjaP6Ih+gyU
+LNk/8g8B8r6u5j/LFuYfN8Tjv939KQs/zNW/IX2ozRjR17/115wmaXPlPza+
+N+c9i+S/GOKHgdc5x7/J8zZNOXzHP03sQCGN6u4/jXOa6EVz6j/FJUE3rozh
+PyCuWNZpMsA/U+02hMicuz/R8iZO79XZv5vW0v+VEu2/+nj7psIM4z//G995
+mIPgv6D8hZ4lteM/NNnEUTuT1L8ydJjic4fDvy8na3DE5+2/5Ja4sLPq4L9E
+oohhVgzrP11RTzt18rM/JGxM0QW27L9KkNf3Ee3bvxsovs8RXbE/X+ANhtMT
+hb9wGPtFjmHbP0aWbPTv6+y/w2sfUDhP4r/E3b7naafnP6cVbFPtvNY/jTTg
+eNDjsj9YGWzU+bHvvxqs/2tdwr0/Lh4r1iPO7j980/PH5RXRv5BQ8yrt9KY/
+IFhFbM9lkr88MJfg5p/vv8SZu4igacM/HlDMqQ==
+       "]}, 0}, {{
+       Hold[$CellContext`nf$$], 
+       NearestFunction[1, {15, 3}, 3, CompressedData["
+1:eJwBeQGG/iFib1JlAgAAAAMAAAAPAAAA9YTLko1S6j/yDwHyvq7mPyF9qM0Y
+0de/GOKHgdc5x7+Nc5roRXPqP1PtNoTInLs/+nj7psIM4z802cRRO5PUv+SW
+uLCz6uC/JGxM0QW27L9f4A2G0xOFv8NrH1A4T+K/jTTgeNDjsj8uHivWI87u
+PyBYRWzPZZK/4eevg1VI2j/LFuYfN8Tjv/XXnCZpc+U/yfM2TTl8xz/FJUE3
+rozhP9HyJk7v1dm//xvfeZiD4L8ydJjic4fDv0SiiGFWDOs/SpDX9xHt279w
+GPtFjmHbP8Tdvudpp+c/WBls1Pmx77980/PH5RXRvzwwl+Dmn++/oiH6DJQs
+2T/d/SkLP8zVvza+N+c9i+S/TexAIY3q7j8grljWaTLAP5vW0v+VEu2/oPyF
+niW14z8vJ2twxOftv11RTzt18rM/Gyi+zxFdsT9Glmz07+vsv6cVbFPtvNY/
+Gqz/a13CvT+QUPMq7fSmP8SZu4igacM/s+DMqQ==
+        "], CompressedData["
+1:eJwBeQGG/iFib1JlAgAAAA8AAAADAAAA9YTLko1S6j/h56+DVUjaP6Ih+gyU
+LNk/8g8B8r6u5j/LFuYfN8Tjv939KQs/zNW/IX2ozRjR17/115wmaXPlPza+
+N+c9i+S/GOKHgdc5x7/J8zZNOXzHP03sQCGN6u4/jXOa6EVz6j/FJUE3rozh
+PyCuWNZpMsA/U+02hMicuz/R8iZO79XZv5vW0v+VEu2/+nj7psIM4z//G995
+mIPgv6D8hZ4lteM/NNnEUTuT1L8ydJjic4fDvy8na3DE5+2/5Ja4sLPq4L9E
+oohhVgzrP11RTzt18rM/JGxM0QW27L9KkNf3Ee3bvxsovs8RXbE/X+ANhtMT
+hb9wGPtFjmHbP0aWbPTv6+y/w2sfUDhP4r/E3b7naafnP6cVbFPtvNY/jTTg
+eNDjsj9YGWzU+bHvvxqs/2tdwr0/Lh4r1iPO7j980/PH5RXRv5BQ8yrt9KY/
+IFhFbM9lkr88MJfg5p/vv8SZu4igacM/HlDMqQ==
+        "], Automatic, Automatic, 
+        Hold[
+         Nearest[CompressedData["
+1:eJwBeQGG/iFib1JlAgAAAA8AAAADAAAA9YTLko1S6j/h56+DVUjaP6Ih+gyU
+LNk/8g8B8r6u5j/LFuYfN8Tjv939KQs/zNW/IX2ozRjR17/115wmaXPlPza+
+N+c9i+S/GOKHgdc5x7/J8zZNOXzHP03sQCGN6u4/jXOa6EVz6j/FJUE3rozh
+PyCuWNZpMsA/U+02hMicuz/R8iZO79XZv5vW0v+VEu2/+nj7psIM4z//G995
+mIPgv6D8hZ4lteM/NNnEUTuT1L8ydJjic4fDvy8na3DE5+2/5Ja4sLPq4L9E
+oohhVgzrP11RTzt18rM/JGxM0QW27L9KkNf3Ee3bvxsovs8RXbE/X+ANhtMT
+hb9wGPtFjmHbP0aWbPTv6+y/w2sfUDhP4r/E3b7naafnP6cVbFPtvNY/jTTg
+eNDjsj9YGWzU+bHvvxqs/2tdwr0/Lh4r1iPO7j980/PH5RXRv5BQ8yrt9KY/
+IFhFbM9lkr88MJfg5p/vv8SZu4igacM/HlDMqQ==
+           "] -> Automatic]]]}, 0}}, Typeset`size$$ = Automatic, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`s$17597$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`n$$ = 15, $CellContext`nf$$ = 
+        NearestFunction[1, {15, 3}, 3, CompressedData["
+1:eJwBeQGG/iFib1JlAgAAAAMAAAAPAAAA9YTLko1S6j/yDwHyvq7mPyF9qM0Y
+0de/GOKHgdc5x7+Nc5roRXPqP1PtNoTInLs/+nj7psIM4z802cRRO5PUv+SW
+uLCz6uC/JGxM0QW27L9f4A2G0xOFv8NrH1A4T+K/jTTgeNDjsj8uHivWI87u
+PyBYRWzPZZK/4eevg1VI2j/LFuYfN8Tjv/XXnCZpc+U/yfM2TTl8xz/FJUE3
+rozhP9HyJk7v1dm//xvfeZiD4L8ydJjic4fDv0SiiGFWDOs/SpDX9xHt279w
+GPtFjmHbP8Tdvudpp+c/WBls1Pmx77980/PH5RXRvzwwl+Dmn++/oiH6DJQs
+2T/d/SkLP8zVvza+N+c9i+S/TexAIY3q7j8grljWaTLAP5vW0v+VEu2/oPyF
+niW14z8vJ2twxOftv11RTzt18rM/Gyi+zxFdsT9Glmz07+vsv6cVbFPtvNY/
+Gqz/a13CvT+QUPMq7fSmP8SZu4igacM/s+DMqQ==
+          "], CompressedData["
+1:eJwBeQGG/iFib1JlAgAAAA8AAAADAAAA9YTLko1S6j/h56+DVUjaP6Ih+gyU
+LNk/8g8B8r6u5j/LFuYfN8Tjv939KQs/zNW/IX2ozRjR17/115wmaXPlPza+
+N+c9i+S/GOKHgdc5x7/J8zZNOXzHP03sQCGN6u4/jXOa6EVz6j/FJUE3rozh
+PyCuWNZpMsA/U+02hMicuz/R8iZO79XZv5vW0v+VEu2/+nj7psIM4z//G995
+mIPgv6D8hZ4lteM/NNnEUTuT1L8ydJjic4fDvy8na3DE5+2/5Ja4sLPq4L9E
+oohhVgzrP11RTzt18rM/JGxM0QW27L9KkNf3Ee3bvxsovs8RXbE/X+ANhtMT
+hb9wGPtFjmHbP0aWbPTv6+y/w2sfUDhP4r/E3b7naafnP6cVbFPtvNY/jTTg
+eNDjsj9YGWzU+bHvvxqs/2tdwr0/Lh4r1iPO7j980/PH5RXRv5BQ8yrt9KY/
+IFhFbM9lkr88MJfg5p/vv8SZu4igacM/HlDMqQ==
+          "], Automatic, Automatic, 
+          Hold[
+           Nearest[CompressedData["
+1:eJwBeQGG/iFib1JlAgAAAA8AAAADAAAA9YTLko1S6j/h56+DVUjaP6Ih+gyU
+LNk/8g8B8r6u5j/LFuYfN8Tjv939KQs/zNW/IX2ozRjR17/115wmaXPlPza+
+N+c9i+S/GOKHgdc5x7/J8zZNOXzHP03sQCGN6u4/jXOa6EVz6j/FJUE3rozh
+PyCuWNZpMsA/U+02hMicuz/R8iZO79XZv5vW0v+VEu2/+nj7psIM4z//G995
+mIPgv6D8hZ4lteM/NNnEUTuT1L8ydJjic4fDvy8na3DE5+2/5Ja4sLPq4L9E
+oohhVgzrP11RTzt18rM/JGxM0QW27L9KkNf3Ee3bvxsovs8RXbE/X+ANhtMT
+hb9wGPtFjmHbP0aWbPTv6+y/w2sfUDhP4r/E3b7naafnP6cVbFPtvNY/jTTg
+eNDjsj9YGWzU+bHvvxqs/2tdwr0/Lh4r1iPO7j980/PH5RXRv5BQ8yrt9KY/
+IFhFbM9lkr88MJfg5p/vv8SZu4igacM/HlDMqQ==
+             "] -> Automatic]]], $CellContext`pp$$ = CompressedData["
+1:eJwBeQGG/iFib1JlAgAAAA8AAAADAAAA9YTLko1S6j/h56+DVUjaP6Ih+gyU
+LNk/8g8B8r6u5j/LFuYfN8Tjv939KQs/zNW/IX2ozRjR17/115wmaXPlPza+
+N+c9i+S/GOKHgdc5x7/J8zZNOXzHP03sQCGN6u4/jXOa6EVz6j/FJUE3rozh
+PyCuWNZpMsA/U+02hMicuz/R8iZO79XZv5vW0v+VEu2/+nj7psIM4z//G995
+mIPgv6D8hZ4lteM/NNnEUTuT1L8ydJjic4fDvy8na3DE5+2/5Ja4sLPq4L9E
+oohhVgzrP11RTzt18rM/JGxM0QW27L9KkNf3Ee3bvxsovs8RXbE/X+ANhtMT
+hb9wGPtFjmHbP0aWbPTv6+y/w2sfUDhP4r/E3b7naafnP6cVbFPtvNY/jTTg
+eNDjsj9YGWzU+bHvvxqs/2tdwr0/Lh4r1iPO7j980/PH5RXRv5BQ8yrt9KY/
+IFhFbM9lkr88MJfg5p/vv8SZu4igacM/HlDMqQ==
+         "], $CellContext`s$$ = True}, "ControllerVariables" :> {
+        Hold[$CellContext`s$$, $CellContext`s$17597$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> EventHandler[
+        Style[
+         Graphics3D[{
+           Dynamic[
+            If[
+             Not[$CellContext`s$$], {
+              Opacity[0.75], 
+              Sphere[]}, $CellContext`nf$$ = 
+              Nearest[$CellContext`pp$$ -> Automatic]; First[
+               
+               ParametricPlot3D[{
+                Cos[$CellContext`u] Sin[$CellContext`v], Sin[$CellContext`u] 
+                 Sin[$CellContext`v], 
+                 Cos[$CellContext`v]}, {$CellContext`v, 0, 
+                 Pi}, {$CellContext`u, 0, 2 Pi}, MaxRecursion -> 
+                ControlActive[1, Automatic], PlotPoints -> 
+                ControlActive[Automatic, 50], MeshStyle -> None, Mesh -> {
+                  Range[3/2, Length[$CellContext`pp$$] - 1/2]}, MeshShading -> 
+                Map[Hue, Range[
+                    Length[$CellContext`pp$$]]/Length[$CellContext`pp$$]], 
+                MeshFunctions -> {First[
+                   $CellContext`nf$$[{#, #2, #3}, 1]]& }]]]], 
+           Dynamic[
+            $CellContext`vd[$CellContext`pp$$]], {Red, 
+            Sphere[
+             Dynamic[$CellContext`pp$$], 0.05]}}, Boxed -> False, PlotRange -> 
+          1.1, Epilog -> Inset[
+            Style["Shift+mouseover", FontColor -> Dynamic[
+               If[
+                CurrentValue["ShiftKey"], Black, Gray]]], {Right, Bottom}, {
+            Right, Bottom}], ImageSize -> {Automatic, 400}, RotationAction -> 
+          "Clip"], Deployed -> Dynamic[
+           CurrentValue["ShiftKey"]]], "MouseMoved" :> If[
+          CurrentValue["ShiftKey"], 
+          ((Part[$CellContext`pp$$, 
+            First[
+             Ordering[
+              Map[
+               Function[$CellContext`pt, 
+                
+                Dot[$CellContext`pt - #, $CellContext`pt - #]], \
+$CellContext`pp$$], 1]]] = #)& )[
+           Normalize[
+            First[
+             MousePosition[
+             "Graphics3DBoxIntercepts", {{-1., -1., -1.}, {1., 1., 1.}}]]]]]],
+       "Specifications" :> {{{$CellContext`n$$, 15, "number of points"}, 4, 
+         15, 1, 
+         Dynamic[Manipulator[
+           
+           Dynamic[$CellContext`n$$, 
+            If[($CellContext`n$$ = #) < 
+             Length[$CellContext`pp$$], $CellContext`pp$$ = 
+             Take[$CellContext`pp$$, $CellContext`n$$], $CellContext`pp$$ = 
+             Join[$CellContext`pp$$, 
+               Map[Normalize, 
+                RandomReal[
+                 
+                 NormalDistribution[], {$CellContext`n$$ - 
+                  Length[$CellContext`pp$$], 3}]]]]& ], #2, Appearance -> 
+           "Labeled"]& ]}, {{$CellContext`s$$, True, "fill regions"}, {
+         True, False}, ControlType -> 
+         Checkbox}, {{$CellContext`pp$$, CompressedData["
+1:eJwBeQGG/iFib1JlAgAAAA8AAAADAAAA9YTLko1S6j/h56+DVUjaP6Ih+gyU
+LNk/8g8B8r6u5j/LFuYfN8Tjv939KQs/zNW/IX2ozRjR17/115wmaXPlPza+
+N+c9i+S/GOKHgdc5x7/J8zZNOXzHP03sQCGN6u4/jXOa6EVz6j/FJUE3rozh
+PyCuWNZpMsA/U+02hMicuz/R8iZO79XZv5vW0v+VEu2/+nj7psIM4z//G995
+mIPgv6D8hZ4lteM/NNnEUTuT1L8ydJjic4fDvy8na3DE5+2/5Ja4sLPq4L9E
+oohhVgzrP11RTzt18rM/JGxM0QW27L9KkNf3Ee3bvxsovs8RXbE/X+ANhtMT
+hb9wGPtFjmHbP0aWbPTv6+y/w2sfUDhP4r/E3b7naafnP6cVbFPtvNY/jTTg
+eNDjsj9YGWzU+bHvvxqs/2tdwr0/Lh4r1iPO7j980/PH5RXRv5BQ8yrt9KY/
+IFhFbM9lkr88MJfg5p/vv8SZu4igacM/HlDMqQ==
+          "]}, 0, ControlType -> None}, {{$CellContext`nf$$, 
+          NearestFunction[1, {15, 3}, 3, CompressedData["
+1:eJwBeQGG/iFib1JlAgAAAAMAAAAPAAAA9YTLko1S6j/yDwHyvq7mPyF9qM0Y
+0de/GOKHgdc5x7+Nc5roRXPqP1PtNoTInLs/+nj7psIM4z802cRRO5PUv+SW
+uLCz6uC/JGxM0QW27L9f4A2G0xOFv8NrH1A4T+K/jTTgeNDjsj8uHivWI87u
+PyBYRWzPZZK/4eevg1VI2j/LFuYfN8Tjv/XXnCZpc+U/yfM2TTl8xz/FJUE3
+rozhP9HyJk7v1dm//xvfeZiD4L8ydJjic4fDv0SiiGFWDOs/SpDX9xHt279w
+GPtFjmHbP8Tdvudpp+c/WBls1Pmx77980/PH5RXRvzwwl+Dmn++/oiH6DJQs
+2T/d/SkLP8zVvza+N+c9i+S/TexAIY3q7j8grljWaTLAP5vW0v+VEu2/oPyF
+niW14z8vJ2twxOftv11RTzt18rM/Gyi+zxFdsT9Glmz07+vsv6cVbFPtvNY/
+Gqz/a13CvT+QUPMq7fSmP8SZu4igacM/s+DMqQ==
+           "], CompressedData["
+1:eJwBeQGG/iFib1JlAgAAAA8AAAADAAAA9YTLko1S6j/h56+DVUjaP6Ih+gyU
+LNk/8g8B8r6u5j/LFuYfN8Tjv939KQs/zNW/IX2ozRjR17/115wmaXPlPza+
+N+c9i+S/GOKHgdc5x7/J8zZNOXzHP03sQCGN6u4/jXOa6EVz6j/FJUE3rozh
+PyCuWNZpMsA/U+02hMicuz/R8iZO79XZv5vW0v+VEu2/+nj7psIM4z//G995
+mIPgv6D8hZ4lteM/NNnEUTuT1L8ydJjic4fDvy8na3DE5+2/5Ja4sLPq4L9E
+oohhVgzrP11RTzt18rM/JGxM0QW27L9KkNf3Ee3bvxsovs8RXbE/X+ANhtMT
+hb9wGPtFjmHbP0aWbPTv6+y/w2sfUDhP4r/E3b7naafnP6cVbFPtvNY/jTTg
+eNDjsj9YGWzU+bHvvxqs/2tdwr0/Lh4r1iPO7j980/PH5RXRv5BQ8yrt9KY/
+IFhFbM9lkr88MJfg5p/vv8SZu4igacM/HlDMqQ==
+           "], Automatic, Automatic, 
+           Hold[
+            Nearest[CompressedData["
+1:eJwBeQGG/iFib1JlAgAAAA8AAAADAAAA9YTLko1S6j/h56+DVUjaP6Ih+gyU
+LNk/8g8B8r6u5j/LFuYfN8Tjv939KQs/zNW/IX2ozRjR17/115wmaXPlPza+
+N+c9i+S/GOKHgdc5x7/J8zZNOXzHP03sQCGN6u4/jXOa6EVz6j/FJUE3rozh
+PyCuWNZpMsA/U+02hMicuz/R8iZO79XZv5vW0v+VEu2/+nj7psIM4z//G995
+mIPgv6D8hZ4lteM/NNnEUTuT1L8ydJjic4fDvy8na3DE5+2/5Ja4sLPq4L9E
+oohhVgzrP11RTzt18rM/JGxM0QW27L9KkNf3Ee3bvxsovs8RXbE/X+ANhtMT
+hb9wGPtFjmHbP0aWbPTv6+y/w2sfUDhP4r/E3b7naafnP6cVbFPtvNY/jTTg
+eNDjsj9YGWzU+bHvvxqs/2tdwr0/Lh4r1iPO7j980/PH5RXRv5BQ8yrt9KY/
+IFhFbM9lkr88MJfg5p/vv8SZu4igacM/HlDMqQ==
+              "] -> Automatic]]]}, 0, ControlType -> None}}, 
+      "Options" :> {AutorunSequencing -> {2}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>((
+      With[{$CellContext`$TetGenLibrary = 
+         FileNameJoin[{$InstallationDirectory, "SystemFiles", "Links", 
+            "TetGenLink", "LibraryResources", $SystemID, 
+            StringExpression["tetgenWolfram.", 
+             Which[
+              StringMatchQ[$SystemID, 
+               StringExpression["Windows", 
+                BlankNullSequence[]]], "dll", 
+              StringMatchQ[$SystemID, 
+               StringExpression["Mac", 
+                BlankNullSequence[]]], "dylib", 
+              Blank[], "so"]]}]}, $CellContext`instanceFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, 
+           "newTetGenInstance", {}, Integer]; $CellContext`setPointsFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, "setPointList", {
+           Integer, {Real, 2, "Shared"}}, 
+           Integer]; $CellContext`tetrahedralizeFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, "tetrahedralizeFun",
+            LinkObject, LinkObject]; $CellContext`getPointsFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, "getPointList", {
+           Integer}, {Real, 
+            Blank[]}]; $CellContext`getFacesFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, "getFaces", {
+           Integer}, {Integer, 2}]; $CellContext`deleteFun = 
+         LibraryFunctionLoad[$CellContext`$TetGenLibrary, 
+           "deleteTetGenInstance", {Integer}, Integer]]; $CellContext`ch[
+         Pattern[$CellContext`pts, 
+          Blank[]]] := 
+       Module[{$CellContext`inInst, $CellContext`outInst}, \
+{$CellContext`inInst, $CellContext`outInst} = 
+          Apply[$CellContext`instanceFun, {{}, {}}, {
+            1}]; $CellContext`setPointsFun[$CellContext`inInst, 
+           Developer`ToPackedArray[
+            N[$CellContext`pts]]]; $CellContext`tetrahedralizeFun[
+          "-E", $CellContext`inInst, $CellContext`outInst]; ((
+          Map[$CellContext`deleteFun, {$CellContext`inInst, \
+$CellContext`outInst}]; #)& )[{
+            $CellContext`getPointsFun[$CellContext`outInst], \
+$CellContext`getFacesFun[$CellContext`outInst] + 1}]]; $CellContext`vd[
+         Condition[
+          Pattern[$CellContext`pts, 
+           Blank[]], Length[$CellContext`pts] > 3]] := 
+       Module[{$CellContext`verts, $CellContext`polys, \
+$CellContext`voronoiverts, $CellContext`segs}, {$CellContext`verts, \
+$CellContext`polys} = $CellContext`ch[$CellContext`pts]; \
+$CellContext`voronoiverts = Map[Normalize, 
+            Apply[
+            Cross[Part[$CellContext`verts, #3] - Part[$CellContext`verts, #], 
+              Part[$CellContext`verts, #2] - 
+              Part[$CellContext`verts, #]]& , $CellContext`polys, {
+             1}]]; $CellContext`segs = Apply[If[Length[
+               Apply[Intersection, 
+                Part[$CellContext`polys, {
+                  SlotSequence[1]}]]] < 2, {}, 
+             ParametricPlot3D[
+              Evaluate[
+               Normalize[
+               Part[$CellContext`voronoiverts, #] $CellContext`t + 
+                Part[$CellContext`voronoiverts, #2] (
+                  1 - $CellContext`t)]], {$CellContext`t, 0, 1}, PlotStyle -> 
+              AbsoluteThickness[2]]]& , 
+            Subsets[
+             Range[
+              Length[$CellContext`polys]], {2}], {1}]; First[
+           Show[$CellContext`segs]]]); Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->335257666]
+}, Open  ]],
+
+Cell["", "DetailsSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.508953773671875*^9},
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.508953774453125*^9},
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0, CellBaseline -> Baseline], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell["", "SearchTermsSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Convex Hull",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/ConvexHull.html"], None},
+ ButtonNote->"http://mathworld.wolfram.com/ConvexHull.html"]], "RelatedLinks",
+ CellChangeTimes->{{3.50895391940625*^9, 3.50895392653125*^9}},
+ CellID->25726814],
+
+Cell[TextData[{
+ StyleBox[ButtonBox["TetGenLink",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://reference.wolfram.com/mathematica/TetGenLink/guide/TetGenLink.\
+html"], None},
+  ButtonNote->
+   "http://reference.wolfram.com/mathematica/TetGenLink/guide/TetGenLink.\
+html"],
+  FontSlant->"Italic"],
+ ButtonBox[" Package",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://reference.wolfram.com/mathematica/TetGenLink/guide/TetGenLink.\
+html"], None},
+  ButtonNote->
+   "http://reference.wolfram.com/mathematica/TetGenLink/guide/TetGenLink.html"]
+}], "RelatedLinks",
+ CellChangeTimes->{{3.50895387571875*^9, 3.50895387571875*^9}},
+ CellID->72071500],
+
+Cell[TextData[{
+ StyleBox[ButtonBox["TetGenLink",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://reference.wolfram.com/mathematica/TetGenLink/tutorial/\
+Overview.html"], None},
+  ButtonNote->
+   "http://reference.wolfram.com/mathematica/TetGenLink/tutorial/Overview.\
+html"],
+  FontSlant->"Italic"],
+ ButtonBox[" User Guide",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://reference.wolfram.com/mathematica/TetGenLink/tutorial/\
+Overview.html"], None},
+  ButtonNote->
+   "http://reference.wolfram.com/mathematica/TetGenLink/tutorial/Overview.\
+html"]
+}], "RelatedLinks",
+ CellChangeTimes->{{3.50895384875*^9, 3.50895384875*^9}},
+ CellID->314896860],
+
+Cell[TextData[ButtonBox["Voronoi Diagram",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/VoronoiDiagram.html"], None},
+ ButtonNote->
+  "http://mathworld.wolfram.com/VoronoiDiagram.html"]], "RelatedLinks",
+ CellChangeTimes->{{3.508953800140625*^9, 3.508953807359375*^9}},
+ CellID->608514206]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Maxim Rytin",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Maxim+Rytin"], 
+    None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Maxim+Rytin"]
+}], "Author",
+ CellChangeTimes->{{3.508894323956319*^9, 3.5088943265295763`*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{926, 764},
+WindowMargins->{{Automatic, 158}, {Automatic, 3}},
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsCyrillic"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[90000, 1843, 353, 9, 22, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[90356, 1854, 719, 17, 22, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[91078, 1873, 340, 11, 22, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[91421, 1886, 637, 15, 22, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[92061, 1903, 844, 21, 22, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[92908, 1926, 369, 9, 22, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[93280, 1937, 1464, 31, 22, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[94747, 1970, 908, 21, 22, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 98562, 2090},
+ {"RotateAndZoomIn3D", 98671, 2093},
+ {"DragLocators", 98781, 2096},
+ {"CreateAndDeleteLocators", 98897, 2099},
+ {"SliderZoom", 99011, 2102},
+ {"GamepadControls", 99117, 2105},
+ {"AutomaticAnimation", 99230, 2108},
+ {"BookmarkAnimation", 99347, 2111}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 116, 1, 74, "DemoTitle"],
+Cell[698, 25, 33, 0, 272, "InitializationSection"],
+Cell[CellGroupData[{
+Cell[756, 29, 29, 0, 194, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[810, 33, 17231, 398, 1288, "Input"],
+Cell[18044, 433, 9656, 197, 523, "Output",
+ CellID->323401914]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27746, 636, 36, 0, 166, "ManipulateCaptionSection"],
+Cell[27785, 638, 719, 11, 52, "ManipulateCaption"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28541, 654, 28, 0, 168, "ThumbnailSection"],
+Cell[28572, 656, 16182, 303, 523, "Output",
+ CellID->165937451]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[44791, 964, 28, 0, 138, "SnapshotsSection"],
+Cell[44822, 966, 9656, 196, 523, "Output",
+ CellID->125247575],
+Cell[54481, 1164, 17630, 323, 523, "Output",
+ CellID->91479619],
+Cell[72114, 1489, 17780, 345, 37, "Output",
+ CellID->335257666]
+}, Open  ]],
+Cell[89909, 1837, 26, 0, 332, "DetailsSection"],
+Cell[CellGroupData[{
+Cell[89960, 1841, 37, 0, 108, "ControlSuggestionsSection"],
+Cell[90000, 1843, 353, 9, 22, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[90356, 1854, 719, 17, 22, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[91078, 1873, 340, 11, 22, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[91421, 1886, 637, 15, 22, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[92061, 1903, 844, 21, 22, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[92908, 1926, 369, 9, 22, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[93280, 1937, 1464, 31, 22, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[94747, 1970, 908, 21, 22, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[95670, 1994, 30, 0, 152, "SearchTermsSection"],
+Cell[CellGroupData[{
+Cell[95725, 1998, 31, 0, 126, "RelatedLinksSection"],
+Cell[95759, 2000, 303, 6, 22, "RelatedLinks",
+ CellID->25726814],
+Cell[96065, 2008, 666, 19, 22, "RelatedLinks",
+ CellID->72071500],
+Cell[96734, 2029, 670, 20, 22, "RelatedLinks",
+ CellID->314896860],
+Cell[97407, 2051, 321, 7, 22, "RelatedLinks",
+ CellID->608514206]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[97765, 2063, 25, 0, 136, "AuthorSection"],
+Cell[97793, 2065, 361, 10, 22, "Author"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
