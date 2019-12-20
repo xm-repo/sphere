@@ -7,7 +7,7 @@
 
 Папка [g2](/g2/) - к ребрам из [g](/g/) добавлены ребра между вершинами на расстоянии 2
 
-Папка [vor](/vor/) - области Вороного (отделены пустой строкой, порядок соответствует вершинам из [thomson](/thomson/)). Можно строить в [scipy.spatial.SphericalVoronoi](https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.spatial.SphericalVoronoi.html), [libdts2](https://github.com/fmi-alg/libdts2), [stripy/STRIPACK](https://pypi.org/project/stripy/) или руками по [g](/g/)
+Папка [vor](/vor/) - области Вороного (отделены пустой строкой, порядок соответствует вершинам из [thomson](/thomson/)). Можно строить в [scipy.spatial.SphericalVoronoi](https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.spatial.SphericalVoronoi.html), [libdts2](https://github.com/fmi-alg/libdts2), [stripy/STRIPACK](https://github.com/underworldcode/stripy) или руками по [g](/g/)
 
 Папка [c](/c/) - правильные раскраски в формате "l <номер вершины> <номер цвета>"
 
