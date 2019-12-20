@@ -1,7 +1,7 @@
 # RU
 Папка [thomson](/thomson/) решения [задачи Томсона](https://en.wikipedia.org/wiki/Thomson_problem) из [The Cambridge Cluster Database](http://www-wales.ch.cam.ac.uk/~wales/CCD/Thomson/table.html)
 
-Папка [tri](/tri/) - триангуляция (в строке - три номера вершин из [thomson](/thomson/), составляющих треугольник), построены в [Qhull](http://www.qhull.org/)
+Папка [tri](/tri/) - триангуляция (в строке - три номера вершин из [thomson](/thomson/), составляющих треугольник), построены в [Qhull](http://www.qhull.org/) ((hull)[http://www.netlib.org/voronoi/hull.html])
 
 Папка [g](/g/) - триангуляция в виде графа в формате [DIMACS ](http://lcs.ios.ac.cn/~caisw/Resource/about_DIMACS_graph_format.txt) (нумерация вершин из [thomson](/thomson/) сохранена)
 
