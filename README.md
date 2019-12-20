@@ -13,6 +13,8 @@
 
 Папка [code/viz](/code/viz) - программа для визуализации на opengl, чтобы собрать, нужны boost, [freeglut](http://freeglut.sourceforge.net/), [glm](https://glm.g-truc.net/0.9.9/index.html), [gl2ps](http://geuz.org/gl2ps/)
 
+[code/sphere.nb](code/sphere.nb) - ноутбук Mathematica с визуализацией (медленно работает)
+
 [colorings.txt](colorings.txt) - результаты по раскраске: <имя файла> <n цветов> диапазон радиусов
 
 [diams.txt](diams.txt)- <имя файла> <мин расстояние между областями на расстоянии 3> <макс диаметр области> <отношение>
