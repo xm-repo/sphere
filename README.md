@@ -11,7 +11,7 @@
 
 Папка [c](/c/) - правильные раскраски в формате "l <номер вершины> <номер цвета>"
 
-Папка [code/viz](/code/viz) - программа для визуализации на opengl, чтобы собрать, нужны boost, [freeglut](http://freeglut.sourceforge.net/), [glm](https://glm.g-truc.net/0.9.9/index.html), [gl2ps](http://geuz.org/gl2ps/).
+Папка [code/viz](/code/viz) - программа для визуализации на opengl, чтобы собрать, нужны boost, [freeglut](http://freeglut.sourceforge.net/), [glm](https://glm.g-truc.net/0.9.9/index.html), [gl2ps](http://geuz.org/gl2ps/)
 
 [colorings.txt](colorings.txt) - результаты по раскраске: <имя файла> <n цветов> диапазон радиусов
 
