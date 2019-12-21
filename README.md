@@ -11,7 +11,7 @@
 
 Папка [c](/c/) - правильные раскраски в формате "l <номер вершины> <номер цвета>"
 
-Папка [code/viz](/code/viz) - программа для визуализации на opengl, чтобы собрать из исходников, нужны boost, [freeglut](http://freeglut.sourceforge.net/), [glm](https://glm.g-truc.net/0.9.9/index.html), [gl2ps](http://geuz.org/gl2ps/). Для запуска sphere.exe может понадобиться [vc_redist.x64.exe](https://aka.ms/vs/16/release/vc_redist.x64.exe)
+Папка [code/viz](/code/viz) - программа для визуализации на opengl, чтобы собрать из исходников, нужны boost, [freeglut](http://freeglut.sourceforge.net/), [glm](https://glm.g-truc.net/0.9.9/index.html), [gl2ps](http://geuz.org/gl2ps/). Для запуска [sphere.exe](sphere.exe) может понадобиться [vc_redist.x64.exe](https://aka.ms/vs/16/release/vc_redist.x64.exe)
 
 [code/sphere.nb](code/sphere.nb) - ноутбук Mathematica с визуализацией (медленно работает)
 
