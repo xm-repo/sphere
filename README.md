@@ -21,3 +21,6 @@
 
 [intervals.txt](intervals.txt) - сумма результатов
 
+# RU
+
+todo
