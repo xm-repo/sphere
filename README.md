@@ -21,6 +21,24 @@
 
 [intervals.txt](intervals.txt) - сумма результатов
 
-# RU
+# Генерация CNF по xyz-файлу
+
+В папке [code2](/code2/) проверенный код, для запуска нужны:
+
+- Бибилиотека qhull (на ubuntu работает sudo apt-get install qhull-bin)
+- Пакеты python3: numpy, scipy, networkx, python-sat
+
+генерация CNF задачи о раскраске [квадрата] триангуляции в 8 цветов из решения задачи Томсона: 
+python3 cnf_from_xyz.py filename.xyz
+
+файлы .xyz размещены на сайте Cambridge Cluster Database:
+http://www-wales.ch.cam.ac.uk/~wales/CCD/Thomson/table.html
+
+Генерация CNF задачи о раскраске в 8 цветов [квадрата] триангуляции сферы с икосаэдральной симметрией: 
+python3 sphere_triang.py p q
+
+где p>=1, q>=1 - целые, конструкция симметрична относительно перестановки p и q
+
+# EN
 
 todo
