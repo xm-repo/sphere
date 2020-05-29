@@ -25,7 +25,7 @@
 
 В папке [code2](/code2/) проверенный код, для запуска нужны:
 
-- Бибилиотека qhull (на ubuntu работает sudo apt-get install qhull-bin)
+- Бибилиотека qhull (на ubuntu работает `sudo apt-get install qhull-bin`)
 - Пакеты python3: numpy, scipy, networkx, python-sat
 
 генерация CNF задачи о раскраске [квадрата] триангуляции в 8 цветов из решения задачи Томсона: 
