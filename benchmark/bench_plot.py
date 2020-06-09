@@ -7,7 +7,7 @@ if __name__ == "__main__":
 
     plt.style.use('ggplot')
 
-    example = "132.g2.10.cnf"
+    example = "358.g2.9.cnf"
 
     df = pd.read_csv(example + '.csv')
     print(df.head())

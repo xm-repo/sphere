@@ -9,26 +9,13 @@ import numpy as np
 SOLVERS_DIR = "executables/"
 CNF_DIR = "../formulas/"
 
-examples = [
-    "72.g2.10.cnf",
-    "132.g2.10.cnf",
-    "192.g2.10.cnf",
-    "212.g2.10.cnf",
-    "282.g2.10.cnf",
-    "358.g2.10.cnf",
-    "72.g2.9.cnf",
-    "132.g2.9.cnf",
-    "192.g2.9.cnf",
-    "212.g2.9.cnf",
-    "282.g2.9.cnf",
-    "358.g2.9.cnf",
-    "72.g2.8.cnf",
-    "132.g2.8.cnf",
-    "192.g2.8.cnf",
-    "212.g2.8.cnf",
-    "282.g2.8.cnf",
-    "358.g2.8.cnf",
-    ]
+Ns = [72, 132, 192, 212, 282, 358, 372, 382, 390, 932, 400]
+examples = []
+
+for N in Ns:
+    examples.append(str(N) + ".g2.10.cnf")
+    examples.append(str(N) + ".g2.9.cnf")
+    examples.append(str(N) + ".g2.8.cnf")
 
 if __name__ == "__main__":
 
