@@ -6,6 +6,7 @@ from subprocess import Popen, PIPE
 import pandas as pd
 import numpy as np
 import json
+import threading
 
 SOLVERS_DIR = "executables/"
 CNF_DIR = "../formulas/"
@@ -14,14 +15,23 @@ def run_solver(cmd):
     
     t1 = time.time()
     
-    with subprocess.Popen([cmd], stdout=PIPE, shell=True) as proc:
-       
-        p = psutil.Process(proc.pid)
-        p.memory_info().rss
-        p.memory_info().vms
+    subprocess.call([cmd], shell=True)
 
-        while proc.poll():
-            time.sleep(.01)
+    #with subprocess.Popen([cmd], shell=True) as proc:
+       
+        #draineddata = []        
+        #drainerthread = threading.Thread(target=draineddata.extend, args=(proc.stdout,))
+        #drainerthread.daemon = True
+        #drainerthread.start()
+
+        #p = psutil.Process(proc.pid)
+        #p.memory_info().rss
+        #p.memory_info().vms
+
+        #while proc.poll():
+        #    time.sleep(.01)
+        #proc.wait()
+        #drainerthread.join()
 
     t2 = time.time()
 
@@ -47,19 +57,19 @@ if __name__ == "__main__":
         results["preamble"]["program"] = solver
         results["preamble"]["prog_alias"] = solver
         results["preamble"]["prog_args"] = solver
-        results["preamble"]["benchmark"] = "10"        
+        results["preamble"]["benchmark"] = "9"        
 
         results["stats"] = {}
 
         for formula in formulas:        
 
-            cmd = "./" + SOLVERS_DIR + solver + " " + CNF_DIR + formula
+            cmd = "./" + SOLVERS_DIR + solver + " " + CNF_DIR + formula + ">/dev/null"
             rtime = run_solver(cmd)
 
             problem = os.path.basename(formula)[:-4]
             results["stats"][problem] = {}
             results["stats"][problem]["status"] = True
-            results["stats"][problem]["rtime"] = rtime
+            results["stats"][problem]["rtime"] = rtime * 1000
 
             print(solver + " " + problem)
 
