@@ -5,20 +5,31 @@ import subprocess
 from subprocess import Popen, PIPE
 import pandas as pd
 import numpy as np
+import json
 
 SOLVERS_DIR = "executables/"
 CNF_DIR = "../formulas/"
 
-Ns = [72, 132, 192, 212, 282, 358, 372, 382, 390, 932, 400]
-examples = []
+def run_solver(cmd):
+    
+    t1 = time.time()
+    
+    with subprocess.Popen([cmd], stdout=PIPE, shell=True) as proc:
+       
+        p = psutil.Process(proc.pid)
+        p.memory_info().rss
+        p.memory_info().vms
 
-for N in Ns:
-    examples.append(str(N) + ".g2.10.cnf")
-    examples.append(str(N) + ".g2.9.cnf")
-    examples.append(str(N) + ".g2.8.cnf")
+        while proc.poll():
+            time.sleep(.01)
+
+    t2 = time.time()
+
+    return t2 - t1
 
 if __name__ == "__main__":
 
+    formulas = glob.glob(f"{CNF_DIR}/*.10.cnf")
     solvers = glob.glob(f"{SOLVERS_DIR}/*")
 
     tmp = []
@@ -27,43 +38,30 @@ if __name__ == "__main__":
         tmp.append(os.path.basename(solver))
 
     solvers = tmp[:]
-
     
-    for example in examples:
+    
+    for solver in solvers:
+        
+        results = {}
+        results["preamble"] = {}
+        results["preamble"]["program"] = solver
+        results["preamble"]["prog_alias"] = solver
+        results["preamble"]["prog_args"] = solver
+        results["preamble"]["benchmark"] = "10"        
 
-        results = []
+        results["stats"] = {}
 
-        print(example)
+        for formula in formulas:        
 
-        for solver in solvers:
-            
-            cmd = "./" + SOLVERS_DIR + solver + " " + CNF_DIR + example
-            
-            timers = dict()
-            timers["solver"] = solver
-            timers["example"] = example
+            cmd = "./" + SOLVERS_DIR + solver + " " + CNF_DIR + formula
+            rtime = run_solver(cmd)
 
-            print(solver)
+            problem = os.path.basename(formula)[:-4]
+            results["stats"][problem] = {}
+            results["stats"][problem]["status"] = True
+            results["stats"][problem]["rtime"] = rtime
 
-            for i in range(10):
-                t1 = time.time()
-                with subprocess.Popen([cmd], stdout=PIPE, shell=True) as proc:
-                    
-                    p = psutil.Process(proc.pid)
-                    p.memory_info().rss
-                    p.memory_info().vms
+            print(solver + " " + problem)
 
-                    while proc.poll():
-                        time.sleep(.01)
-
-                t2 = time.time()
-
-                timers[i] = t2 - t1
-
-                #print(f"{solver}: {t2 - t1}")
-
-            results.append(timers)
-
-        df = pd.DataFrame(results)
-        print(df.head())
-        df.to_csv(example + ".csv", index=False)
+        with open("mkplot/" + solver + ".json", "w") as outfile:
+            json.dump(results, outfile)
