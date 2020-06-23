@@ -7,7 +7,7 @@ intv_7 = I.open(I.inf, -I.inf)
 intv_8 = I.open(I.inf, -I.inf)
 intv_9 = I.open(I.inf, -I.inf)
 
-f = open('colorings.txt', 'r')
+f = open('../colorings.txt', 'r')
 
 for l in f:
     l = (' '.join(l.split(' '))).split()
