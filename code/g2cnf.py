@@ -11,9 +11,9 @@ import networkx as nx
 
 #https://pysathq.github.io/
 #!pip install python-sat
-import pysat
-from pysat.formula import CNF
-from pysat.solvers import *
+#import pysat
+#from pysat.formula import CNF
+#from pysat.solvers import *
 
 import os
 import sys
@@ -69,8 +69,8 @@ class Utils:
             for u, v in g.edges():
                 f.write("e {} {}\n".format(u, v))
             for node in g.nodes():
-                if 'c' in g.node[node]:
-                    f.write("l {} {}\n".format(node, g.node[node]['c']))
+                if 'c' in g.nodes[node]:
+                    f.write("l {} {}\n".format(node, g.nodes[node]['c']))
 
     def draw_with_colors(g = nx.Graph()):
         color_map = []
@@ -139,9 +139,9 @@ class ColSAT:
 
     def check_coloring(self):
         for n1, n2 in self.g.edges():
-            if 'c' not in self.g.node[n1] or 'c' not in self.g.node[n2]:
+            if 'c' not in self.g.nodes[n1] or 'c' not in self.g.nodes[n2]:
                 return False
-            if self.g.node[n1]['c'] == self.g.node[n2]['c']:
+            if self.g.nodes[n1]['c'] == self.g.nodes[n2]['c']:
                 return False
         return True
     
@@ -150,7 +150,7 @@ class ColSAT:
         check = set()
         for var in self.model[self.model > 0]:        
             node, color = self.cmap.dec(var)
-            self.g.node[node]['c'] = color
+            self.g.nodes[node]['c'] = color
             if (node, color) in check:
                 raise Exception("Two colors for one node???")
             else:
@@ -162,10 +162,32 @@ class ColSAT:
             raise Exception("Something went wrong!")
         
         return self.colored
+
+    def apply_model2(self, g = nx.Graph()):
+        
+        gg = g.copy()
+        check = set()
+
+        for var in self.model[self.model > 0]:        
+            node, color = self.cmap.dec(var)
+            gg.nodes[node]['c'] = color
+            if (node, color) in check:
+                raise Exception("Two colors for one node???")
+            else:
+                check.add((node, color))
+
+        for n1, n2 in gg.edges():
+            if 'c' not in gg.nodes[n1] or 'c' not in gg.nodes[n2]:
+                raise Exception("No color")
+            if gg.nodes[n1]['c'] == gg.nodes[n2]['c']:
+                raise Exception("Bad coloring")
+        
+        return gg
+
         
     def build_cnf(self):
         
-        self.formula = CNF()
+        self.formula = []# CNF()
         colors = list(range(1, self.ncolors + 1))    
 
         for n1, n2 in self.g.edges():
@@ -211,6 +233,7 @@ class ColSAT:
 
 if __name__ == "__main__":
 
+    """
     if len(sys.argv) < 4:
         raise "I need in_file out_file ncolors"
 
@@ -220,5 +243,25 @@ if __name__ == "__main__":
     g = Utils.read_dimacs_graph(infile)
     problem = ColSAT(g, ncolors)
     problem.build_cnf().to_file(outfile)
+    """
 
+    xyz = sys.argv[1]
 
+    g = Utils.read_dimacs_graph(f"../g/{xyz}.g")
+    g2 = Utils.read_dimacs_graph(f"../g2/{xyz}.g2")
+
+    problem = ColSAT(g2, 8)
+    problem.build_cnf()
+
+    solution = []
+    with open(f'{xyz}.sol') as f:
+        for line in f:
+            solution.extend([int(x) for x in line.split()])
+
+    problem.model = np.array(solution)
+    problem.solved = True
+    print(problem.apply_model())
+    print(problem.check_coloring())
+
+    gg = problem.apply_model2(g)
+    Utils.write_dimacs_graph(f"../c/{xyz}.8c", gg)
