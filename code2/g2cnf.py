@@ -11,9 +11,9 @@ import networkx as nx
 
 #https://pysathq.github.io/
 #!pip install python-sat
-import pysat
-from pysat.formula import CNF
-from pysat.solvers import *
+#import pysat
+#from pysat.formula import CNF
+#from pysat.solvers import *
 
 import os
 import sys
@@ -163,29 +163,30 @@ class ColSAT:
         
         return self.colored
         
-    def build_cnf(self):
+    def build_cnf(self, ):
         
         self.formula = CNF()
         colors = list(range(1, self.ncolors + 1))    
+
+        for clique in nx.find_cliques(self.g):
+            col = 1
+            for v in clique:
+                self.formula.append([self.cmap.enc(v, col)])
+                col += 1
+            break
 
         for n1, n2 in self.g.edges():
             for c in colors:            
                 self.formula.append([-self.cmap.enc(n1, c), -self.cmap.enc(n2, c)])
 
-        #specials = [28, 194, 242, 355, 387, 397, 468]
-        #ii = 1
-        #for n in specials:
-        #   self.formula.append([self.cmap.enc(n, ii)])
-        #  ii += 1
-
 
         for n in self.g.nodes():
             #if not n in specials:
             self.formula.append([self.cmap.enc(n, c) for c in colors])
-            for c1 in colors:
-                for c2 in colors:
-                    if c1 < c2:
-                        self.formula.append([-self.cmap.enc(n, c1), -self.cmap.enc(n, c2)])
+            #for c1 in colors:
+            #    for c2 in colors:
+            #        if c1 < c2:
+            #            self.formula.append([-self.cmap.enc(n, c1), -self.cmap.enc(n, c2)])
         
         return self.formula
     
