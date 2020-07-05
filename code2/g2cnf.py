@@ -12,8 +12,8 @@ import networkx as nx
 #https://pysathq.github.io/
 #!pip install python-sat
 #import pysat
-#from pysat.formula import CNF
-#from pysat.solvers import *
+from pysat.formula import CNF
+from pysat.solvers import *
 
 import os
 import sys
